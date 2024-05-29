@@ -1,0 +1,19 @@
+.card {
+  padding: 20px;
+  width: 100%;
+  height: 140px;
+  border-radius: 4px;
+  background-color: var(--white);
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  p {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--gray-900);
+  }
+}
