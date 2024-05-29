@@ -36,3 +36,9 @@
   font-size: 28px;
   font-weight: 500;
 }
+
+.list {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
