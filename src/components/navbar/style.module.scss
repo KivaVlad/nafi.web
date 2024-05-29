@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 18px;
+  color: var(--gray-light);
+  cursor: pointer;
+  transition: .2s ease;
+}

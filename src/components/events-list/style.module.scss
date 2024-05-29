@@ -1,0 +1,38 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 73px;
+  margin-top: 60px;
+}
+
+.create_event_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  width: 260px;
+  height: 140px;
+  border-radius: 4px;
+  border: 1px solid var(--blue);
+
+  font-size: 18px;
+  color: var(--blue);
+  cursor: pointer;
+  transition: .3s ease;
+}
+
+.create_event_container:hover {
+  background-color: var(--blue);
+  color: var(--gray-bg);
+}
+
+.create_event_container:hover svg path {
+  stroke: var(--gray-bg);
+  transition: .3s ease;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 500;
+}
