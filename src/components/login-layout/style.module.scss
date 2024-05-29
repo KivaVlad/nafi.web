@@ -1,0 +1,20 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 96px;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--gray-bg);
+}
+
+.logo {
+  margin-top: 78px;
+  min-width: 286px;
+  height: 52px;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

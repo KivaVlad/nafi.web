@@ -1,0 +1,77 @@
+.header {
+  width: 100%;
+  background-color: var(--white);
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 40px;
+}
+
+.tarifs_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 35px;
+}
+
+.tarif {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  p {
+    font-size: 16px;
+    line-height: 16px;
+    color: var(--purple);
+  }
+
+  span {
+    font-size: 16px;
+    line-height: 16px;
+  }
+}
+
+.tarifs_info {
+  p {
+    font-size: 16px;
+    line-height: 16px;
+  }
+}
+
+.btn {
+  min-width: 156px;
+  height: 40px;
+  border: 1px solid var(--blue);
+  border-radius: 4px;
+  color: var(--blue);
+  font-size: 14px;
+  transition: .2s ease;
+  background-color: transparent;
+}
+
+.btn:hover {
+  color: var(--white);
+  background-color: var(--blue);
+  transition: .2s ease;
+}
+
+.user_wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.user_logo {
+  width: 49px;
+  height: 49px;
+  border-radius: 50%;
+}
+
+.user_name {
+  font-size: 18px;
+  color: var(--gray);
+}

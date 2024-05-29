@@ -1,0 +1,7 @@
+.active {
+  color: var(--yellow);
+}
+
+.active svg path, .active svg circle {
+  fill: var(--yellow);
+}

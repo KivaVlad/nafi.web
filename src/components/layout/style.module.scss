@@ -1,0 +1,23 @@
+.container {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.wrapper {
+  display: flex;
+}
+
+.navbar {
+  max-width: 300px;
+  width: 100%;
+  min-height: calc(100vh - 89px);
+  background-color: var(--blue);
+  padding: 40px 0 0 40px;
+}
+
+.main {
+  width: 100%;
+  min-height: calc(100vh - 89px);
+  padding: 34px 30px;
+  background-color: var(--gray-bg);
+}
