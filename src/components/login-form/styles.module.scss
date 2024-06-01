@@ -28,7 +28,7 @@
   span {
     font-size: 12px;
     font-weight: 500;
-    color: var(--purple);
+    color: var(--purple-main);
     cursor: pointer;
   }
 }
@@ -46,7 +46,7 @@
 
     span {
       font-size: 14px;
-      color: var(--purple);
+      color: var(--purple-main);
       cursor: pointer;
     }
   }
@@ -57,7 +57,8 @@
   height: 44px;
   border-radius: 4px;
   color: var(--white);
-  background-color: var(--purple);
+  background-color: var(--purple-main);
+  transition: .2s ease;
 }
 
 .btn_unactive {
@@ -65,6 +66,7 @@
   height: 44px;
   border-radius: 4px;
   color: var(--white);
-  background-color: var(--ligth-purple);
+  background-color: var(--purple-light);
   cursor: default;
+  transition: .2s ease;
 }

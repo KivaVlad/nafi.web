@@ -33,10 +33,9 @@
   --gray-900: #282828;
 
   --white: #FFFFFF;
-  --yellow: #F2A900;
-  --ligth-purple: #AEB0EB;
-  --purple: #5C5EDC;
-  --blue: #5557F2;
+  --orange-main: #F2A900;
+  --purple-light: #AEB0EB;
+  --purple-main: #5C5EDC;
 }
 
 html {
@@ -48,19 +47,4 @@ body {
   font-weight: 400;
   color: var(--gray-dark);
   background-color: var(--white);
-
-  &::-webkit-scrollbar {
-    width: .5rem;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: var(--ligth-purple);
-    height: 1rem;
-  }
-
-  &::-moz-progress-bar {
-    background-color: var(--ligth-purple);
-    width: .5rem;
-    height: 1rem;
-  }
 }

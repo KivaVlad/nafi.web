@@ -1,6 +1,5 @@
 .container {
   width: 100%;
-  min-height: 100vh;
 }
 
 .wrapper {
@@ -8,16 +7,32 @@
 }
 
 .navbar {
-  max-width: 300px;
+  max-width: 260px;
   width: 100%;
-  min-height: calc(100vh - 89px);
-  background-color: var(--blue);
+  
+  background-color: var(--purple-main);
   padding: 40px 0 0 40px;
 }
 
 .main {
   width: 100%;
-  min-height: calc(100vh - 89px);
+  height: calc(100vh - 92px);
   padding: 34px 30px;
   background-color: var(--gray-bg);
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: .5rem;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--purple-light);
+    height: 1rem;
+  }
+
+  &::-moz-progress-bar {
+    background-color: var(--purple-light);
+    width: .5rem;
+    height: 1rem;
+  }
 }

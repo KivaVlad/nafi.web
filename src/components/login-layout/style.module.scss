@@ -1,20 +1,36 @@
 .wrapper {
   display: flex;
-  justify-content: center;
-  gap: 96px;
+  flex-direction: column;
   width: 100%;
   min-height: 100vh;
   background-color: var(--gray-bg);
 }
 
-.logo {
-  margin-top: 78px;
-  min-width: 286px;
-  height: 52px;
+.up_section {
+  width: 100%;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 70%;
+    margin-top: 90px;
+  }
+}
+
+.down_section {
+  display: flex;
+  justify-content: center;
+  gap: 92px;
+  width: 100%;
+  margin-top: 108px;
+}
+
+.animate {
+  max-width: 654px;
+  width: 100%;
 }
 
 .form {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-top: -12px;
 }
