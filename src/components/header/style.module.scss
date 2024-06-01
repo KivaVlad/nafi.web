@@ -25,7 +25,7 @@
   p {
     font-size: 16px;
     line-height: 16px;
-    color: var(--purple);
+    color: var(--purple-main);
   }
 
   span {
@@ -42,11 +42,15 @@
 }
 
 .btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   min-width: 156px;
   height: 40px;
-  border: 1px solid var(--blue);
+  border: 1px solid var(--purple-main);
   border-radius: 4px;
-  color: var(--blue);
+  color: var(--purple-main);
   font-size: 14px;
   transition: .2s ease;
   background-color: transparent;
@@ -54,8 +58,12 @@
 
 .btn:hover {
   color: var(--white);
-  background-color: var(--blue);
+  background-color: var(--purple-main);
   transition: .2s ease;
+}
+
+.btn:hover svg path {
+  fill: var(--white);
 }
 
 .user_wrapper {
