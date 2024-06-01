@@ -8,7 +8,7 @@ const Profile: React.FC = () => {
   const {user} = useAppSelector(store => store.user);
 
   return (
-    <PageLayout title="Ваш профиль" margin_right="125">
+    <PageLayout title="Ваш профиль" marginRight="125">
       <ProfileForm/>
       <VisitCard user={user}/>
     </PageLayout>

@@ -3,15 +3,15 @@ import styles from "./style.module.scss";
 
 interface IProps {
   title: string;
-  margin_right: string;
+  marginRight: string;
   children: ReactNode;
 }
 
-const PageLayout: React.FC<IProps> = ({title, children, margin_right}) => {
+const PageLayout: React.FC<IProps> = ({title, children, marginRight}) => {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>{title}</h1>
-      <div className={margin_right !== '' ? styles.content_125 : styles.content}>
+      <div className={marginRight !== '' ? styles.content_125 : styles.content}>
         {children}
       </div>
     </div>
