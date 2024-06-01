@@ -22,7 +22,7 @@ const Events: React.FC = () => {
   
 
   return (
-    <PageLayout title="Создайте новое событие ">
+    <PageLayout title="Создайте новое событие" marginRight="">
       <EventsList list={list} renderItem={renders.item}/>
     </PageLayout>
   )
