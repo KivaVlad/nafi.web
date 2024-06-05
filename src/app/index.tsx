@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import {Routes, Route} from "react-router-dom";
 import Layout from "../containers/layout";
 import Login from "./login";
@@ -11,18 +10,6 @@ import Advice from "./advice";
 import Support from "./support";
 
 function App() {
-  // async function load() {
-  //   const res = await fetch('http://pavelix6.beget.tech/admin')
-  //   const data = await res.json()
-  //   return data;
-  // }
-
-  // useEffect(() =>{
-  //   load()
-  //   .then(res => console.log(res))
-  //   .catch(error => console.log(error))
-  // }, [])
-
   return (
     <Routes>
       <Route path="/login" element={<Login/>}/>
