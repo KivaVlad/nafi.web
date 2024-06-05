@@ -1,10 +1,10 @@
-import {ReactNode, memo} from "react";
+import {memo} from "react";
 import AnimateLogo from "../login-animate-logo";
-import {logo} from "../../assets/icons";
+import logo from "../../assets/animation.gif";
 import styles from "./style.module.scss";
 
 interface IProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const LoginLayout: React.FC<IProps> = ({children}) => {

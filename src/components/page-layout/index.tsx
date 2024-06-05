@@ -1,19 +1,27 @@
-import {ReactNode, memo} from "react";
+import {memo} from "react";
 import styles from "./style.module.scss";
 
 interface IProps {
   title: string;
-  marginRight: string;
-  children: ReactNode;
+  children: React.ReactNode;
+  button?: React.ReactNode;
 }
 
-const PageLayout: React.FC<IProps> = ({title, children, marginRight}) => {
+const PageLayout: React.FC<IProps> = ({title, children, button}) => {
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>{title}</h1>
-      <div className={marginRight !== '' ? styles.content_125 : styles.content}>
+
+      <div className={styles.header}>
+        <h1 className={styles.title}>{title}</h1>
+        {button && (
+          <div className={styles.options}>{button}</div>
+        )}
+      </div>
+
+      <div className={styles.content}>
         {children}
       </div>
+
     </div>
   )
 }

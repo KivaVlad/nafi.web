@@ -24,17 +24,17 @@
 
 :root {
   /* Colors */
+  --white: #FFFFFF;
   --gray-bg: #F4F6FA;
   --gray-light: #DEDEE2;
-  --gray-300: #D6D6D6;
-  --gray-400: #D9D9D9;
   --gray: #787882;
   --gray-dark: #3D3D3D;
   --gray-900: #282828;
 
-  --white: #FFFFFF;
-  --orange-main: #F2A900;
-  --purple-light: #AEB0EB;
+  --green-main: #C0E64F;
+  --green-icon: #8FB12B;
+  --blue-light: #ADD6FD;
+  --purple-medium: #7179B8;
   --purple-main: #5C5EDC;
 }
 
@@ -46,5 +46,5 @@ body {
   font-family: 'Jost';
   font-weight: 400;
   color: var(--gray-dark);
-  background-color: var(--white);
+  background-color: var(--gray-bg);
 }

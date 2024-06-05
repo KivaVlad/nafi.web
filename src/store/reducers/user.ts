@@ -2,24 +2,23 @@ import {createSlice} from "@reduxjs/toolkit";
 import type {IUser} from "../../types/i-user";
 
 type IState = {
-  user: IUser;
-  isLogged: boolean;
+  data: IUser;
   error: null | string;
   waiting: boolean;
 }
 
 const initialState: IState = {
-  user: {
+  data: {
     id: '1', 
-    name: 'Владимир Смирнов Иванович', 
     username: 'Владимир',
-    job: 'Преподавалель Английского языка',
+    lastname: 'Смирнов',
+    surname: 'Иванович',
+    job: 'Преподавалель английского языка',
     email: 'vladimirsmirnov@mail.ru',
-    tel: '+7 929 555-52-52',
+    tel: '+79295555252',
     org: 'SkyEng',
     entity: 'Физическое лицо'
   },
-  isLogged: false,
   error: null,
   waiting: false
 }

@@ -1,17 +1,25 @@
-import {ReactNode, memo} from "react";
+import {memo} from "react";
+import {filterIcon} from "../../assets/icons";
 import styles from "./style.module.scss";
-import type {IEventCard} from "../../types/i-event-card";
+import type {IEvent} from "../../types/i-event";
 
 interface IProps {
-  list: IEventCard[];
-  renderItem: (param: any) => ReactNode;
+  list: IEvent[];
+  renderItem: (item: IEvent) => React.ReactNode;
 }
 
 const EventsList: React.FC<IProps> = ({list, renderItem}) => {
   return (
     <div className={styles.wrapper}>
 
-      <h2 className={styles.title}>Список моих событий</h2>
+      <div className={styles.header}>
+        <h2 className={styles.title}>Список моих событий</h2>
+        <button className={styles.filter_btn}>
+          Фильтр
+          <img src={filterIcon} alt=""/>
+        </button>
+      </div>
+
       <div className={styles.list}>
         {list.map(item =>
           <div key={item.id}>
@@ -19,6 +27,7 @@ const EventsList: React.FC<IProps> = ({list, renderItem}) => {
           </div>
         )}
       </div>
+
     </div>
   )
 }

@@ -3,7 +3,9 @@ import headerLogo from "./header-logo.svg";
 import userLogo from "./user.svg";
 import plusIcon from "./plus.svg";
 import qrCode from "./code-example.jpg";
-import downloadIcon from "./download.svg";
+import filterIcon from "./filter.svg";
+import lightningIcon from "./lightning.svg";
+import saveIcon from "./save.svg";
 
 export {
   logo,
@@ -11,5 +13,7 @@ export {
   userLogo,
   plusIcon,
   qrCode,
-  downloadIcon,
+  filterIcon,
+  lightningIcon,
+  saveIcon,
 }

@@ -2,15 +2,15 @@ import {memo} from "react";
 import styles from "./style.module.scss";
 
 interface IProps {
-  label: string | undefined;
-  type: React.HTMLInputTypeAttribute | undefined;
-  placeholder: string | undefined;
-  // value: string | undefined;
-  // onChange: (param: string) => void | undefined;
+  label?: string;
+  type: React.HTMLInputTypeAttribute;
+  placeholder?: string;
+  value: string;
+  onChange: (param: string) => void;
 }
 
 const Input: React.FC<IProps> = (props) => {
-  const {label, type, placeholder} = props;
+  const {label, type, placeholder, value, onChange} = props;
 
   return (
     <div className={styles.wrapper}>
@@ -18,8 +18,8 @@ const Input: React.FC<IProps> = (props) => {
       <input 
         type={type}
         placeholder={placeholder}
-        // value={value}
-        // onChange={(e) => onChange(e.target.value)}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
       />
     </div>
   )

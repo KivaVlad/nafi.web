@@ -1,6 +1,7 @@
 import {memo} from "react";
+import DownloadSvg from "../../assets/svg-icons/download";
 import styles from "./style.module.scss";
-import {qrCode, downloadIcon} from "../../assets/icons";
+import {qrCode} from "../../assets/icons";
 import type {IUser} from "../../types/i-user";
 
 interface IProps {
@@ -16,7 +17,7 @@ const VisitCard: React.FC<IProps> = ({user}) => {
 
       <div className={styles.card_container}>
         <div className={styles.user_wrapper}>
-          <h1>{user.name}</h1>
+          <h1>{`${user.username} ${user.lastname} ${user.surname}`}</h1>
 
           <div className={styles.details_card_wrapper}>
             <div className={styles.left}>
@@ -35,7 +36,7 @@ const VisitCard: React.FC<IProps> = ({user}) => {
             <img src={qrCode} alt="" />
           </div>
           <button type='button'>
-            <img src={downloadIcon} alt=""/>
+            <DownloadSvg/>
             QR-код
           </button>
         </div>
