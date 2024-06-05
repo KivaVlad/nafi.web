@@ -1,7 +1,3 @@
-.container {
-  width: 100%;
-}
-
 .wrapper {
   display: flex;
 }
@@ -9,29 +5,31 @@
 .navbar {
   max-width: 260px;
   width: 100%;
-  
-  background-color: var(--purple-main);
-  padding: 40px 0 0 40px;
+  padding: 40px 0 30px 40px;
+  border-right: 1px solid rgba(0, 1, 70, 0.28);
 }
 
 .main {
   width: 100%;
   height: calc(100vh - 92px);
-  padding: 34px 30px;
-  background-color: var(--gray-bg);
+  padding: 34px 60px 34px 30px;
   overflow-y: scroll;
+
+  @media (max-width: 1300px) {
+    padding: 34px 30px;
+  }
 
   &::-webkit-scrollbar {
     width: .5rem;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--purple-light);
+    background-color: var(--purple-medium);
     height: 1rem;
   }
 
   &::-moz-progress-bar {
-    background-color: var(--purple-light);
+    background-color: var(--purple-medium);
     width: .5rem;
     height: 1rem;
   }

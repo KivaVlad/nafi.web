@@ -19,10 +19,15 @@
   input {
     width: 100%;
     height: 44px;
-    border: 1px solid var(--gray-300);
-    border-radius: 4px;
+    border: 1px solid var(--gray-light);
+    border-radius: 10px;
+    background-color: var(--white);
     padding-left: 20px;
     font-size: 12px;
+
+    &::placeholder {
+      color: rgba(0, 1, 70, 0.28);
+    }
   }
 
   span {
@@ -65,8 +70,8 @@
   width: 100%;
   height: 44px;
   border-radius: 4px;
-  color: var(--white);
-  background-color: var(--purple-light);
+  color: var(--gray);
+  background-color: var(--blue-light);
   cursor: default;
   transition: .2s ease;
 }

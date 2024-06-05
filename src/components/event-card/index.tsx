@@ -1,7 +1,7 @@
 import {memo} from "react";
 import {formatDate, formatTime} from "../../utils/date-format";
 import styles from "./style.module.scss";
-import type {IEventCard} from "../../types/i-event-card";
+import type {IEventCard} from "../../types/i-event";
 
 interface IProps {
   item: IEventCard;

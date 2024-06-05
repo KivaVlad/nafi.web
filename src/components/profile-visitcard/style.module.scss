@@ -17,6 +17,10 @@
   min-height: 270px;
   border-radius: 4px;
   background-color: var(--white);
+
+  @media (max-width: 1300px) {
+    padding: 0 60px;
+  }
 }
 
 .user_wrapper {
@@ -55,19 +59,31 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  max-width: 106px;
+  width: 100%;
   gap: 17px;
 
   button {
-    width: 48px;
-    height: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2px;
-    border-radius: 1.84px;
-    background-color: var(--orange-main);
+    width: 100%;
+    height: 25px;
+    gap: 5px;
+    border-radius: 8px;
+    border: 1px solid var(--purple-main);
+    font-size: 10px;
+    color: var(--purple-main);
+    transition: .2s ease;
 
-    font-size: 6.45px;
-    color: var(--white);
+    &:hover {
+      border: 1px solid var(--blue-light);
+      background-color: var(--blue-light);
+      color: var(--gray-dark);
+    }
+
+    &:hover svg path {
+      stroke: var(--gray-dark);
+    }
   }
 }

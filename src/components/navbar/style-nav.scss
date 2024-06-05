@@ -1,7 +1,13 @@
 .active {
-  color: var(--orange-main);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: .2s ease;
+  color: var(--purple-main);
 }
 
-.active svg path, .active svg circle {
-  fill: var(--orange-main);
+.active svg path, .active svg g path {
+  stroke: var(--purple-main);
 }
