@@ -1,10 +1,10 @@
 import {memo} from "react";
 import {formatDate, formatTime} from "../../utils/date-format";
 import styles from "./style.module.scss";
-import type {IEventCard} from "../../types/i-event";
+import type {IEvent} from "../../types/i-event";
 
 interface IProps {
-  item: IEventCard;
+  item: IEvent;
 }
 
 const EventCard: React.FC<IProps> = ({item}) => {

@@ -14,9 +14,9 @@ const ProfileForm: React.FC<IProps> = ({user}) => {
   const [lastname, setLastname] = useState<string>(user.lastname || '');
   const [surname, setSurname] = useState<string>(user.surname || '');
   const [email, setEmail] = useState<string>(user.email || '');
-  const [entity, setEntity] = useState<string>(user.entity || '');
+  // const [entity, setEntity] = useState<string>(user.entity || '');
   const [organization, setOrganization] = useState<string>(user.org || '');
-  const [job, setJob] = useState<string>(user.job || '');
+  // const [job, setJob] = useState<string>(user.job || '');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
   
   const options = [
