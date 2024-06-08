@@ -4,13 +4,14 @@ import styles from "./styles.module.scss";
 interface IProps {
   login: string;
   password: string;
+  errors: string | null;
   setLogin: (param: string) => void;
   setPassword: (param: string) => void;
   onSubmit: () => void;
 }
 
 const LoginForm: React.FC<IProps> = (props) => {
-  const {login, password, setLogin, setPassword, onSubmit} = props;
+  const {login, password, errors, setLogin, setPassword, onSubmit} = props;
   const [active, setActive] = useState<boolean>(false);
 
   function handleSubmit(e: React.FormEvent) {
@@ -38,15 +39,18 @@ const LoginForm: React.FC<IProps> = (props) => {
 
       <div className={styles.inputs_wrapper}>
         <input type="text"
+          className={!errors ? styles.input : styles.error_input}
           placeholder="Электронная почта"
           value={login}
           onChange={(e) => setLogin(e.target.value)}
         />
         <input type="password"
+          className={!errors ? styles.input : styles.error_input}
           placeholder="Пароль"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+        {errors && <span className={styles.errors_message}>{errors}</span>}
         <span>Забыли пароль?</span>
       </div>
 

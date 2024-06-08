@@ -1,41 +1,15 @@
 .wrapper {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   min-height: 100vh;
   background-color: var(--gray-bg);
 }
 
-.up_section {
-  width: 100%;
-
-  .logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 70%;
-    margin-top: 90px;
-
-    img {
-      width: 50%;
-      height: auto;
-    }
-  }
-}
-
-.down_section {
+.content {
   display: flex;
+  align-items: center;
   justify-content: center;
-  gap: 92px;
-  width: 100%;
-  margin-top: 80px;
-}
-
-.animate {
-  max-width: 654px;
-  width: 100%;
-}
-
-.form {
-  margin-top: -12px;
+  gap: 160px;
 }

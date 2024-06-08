@@ -1,5 +1,5 @@
 import {memo} from "react";
-import DownloadSvg from "../../assets/svg-icons/download";
+import DownloadSvg from "../svg-icons/download";
 import styles from "./style.module.scss";
 import {qrCode} from "../../assets/icons";
 import type {IUser} from "../../types/i-user";
