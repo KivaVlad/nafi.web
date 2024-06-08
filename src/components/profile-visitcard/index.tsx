@@ -1,7 +1,8 @@
 import {memo} from "react";
+import {formatPhoneNumber} from "../../utils/phone-format";
 import DownloadSvg from "../svg-icons/download";
-import styles from "./style.module.scss";
 import {qrCode} from "../../assets/icons";
+import styles from "./style.module.scss";
 import type {IUser} from "../../types/i-user";
 
 interface IProps {
@@ -22,7 +23,7 @@ const VisitCard: React.FC<IProps> = ({user}) => {
           <div className={styles.details_card_wrapper}>
             <div className={styles.left}>
               <div className={styles.details}>{user.job}</div>
-              <div className={styles.details}>{user.tel}</div>
+              <div className={styles.details}>{formatPhoneNumber(user.tel)}</div>
             </div>
             <div className={styles.right}>
               <div className={styles.details}>{user.org}</div>

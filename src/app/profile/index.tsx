@@ -9,6 +9,7 @@ import Select from "../../components/select";
 import VisitCard from "../../components/profile-visitcard";
 import Button from "../../components/button";
 import {saveIcon} from "../../assets/icons";
+import {entityOptions, jobOptions} from "../../store/mock";
 
 const Profile: React.FC = () => {
   const {data} = useAppSelector(store => store.user);
@@ -21,19 +22,6 @@ const Profile: React.FC = () => {
   const [organization, setOrganization] = useState<string>(data.org || '');
   const [job, setJob] = useState<string>(data.job || '');
   const [phoneNumber, setPhoneNumber] = useState<string>(formatPhoneNumber(data.tel) || '');
-  
-  const entityOptions = [
-    {id: '1', title: 'Физическое лицо'},
-    {id: '2', title: 'Юридическое лицо'},
-  ]
-
-  const jobOptions = [
-    {id: '1', title: 'Крупный или средний бизнес - Топ-менеджмент'},
-    {id: '2', title: 'Крупный или средний бизнес - Отдел HR, корпуниверситет'},
-    {id: '3', title: 'Образовательная организация (школа, вуз и пр.)'},
-    {id: '4', title: 'Некоммерческая я организация (НКО)'},
-    {id: '5', title: 'Event-агенство'},
-  ]
 
   const callbacks = {
     onSave: useCallback(() => {
