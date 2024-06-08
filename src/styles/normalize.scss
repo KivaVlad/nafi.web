@@ -22,6 +22,14 @@
   src: url('../assets/fonts/Jost-SemiBold.ttf');
 }
 
+@font-face {
+  font-display: swap; 
+  font-family: 'FuturaPT';
+  font-style: normal;
+  font-weight: 400;
+  src: url('../assets/fonts/FuturaPT-Book.ttf');
+}
+
 :root {
   /* Colors */
   --white: #FFFFFF;
