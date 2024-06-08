@@ -1,5 +1,9 @@
+import {useEffect} from "react";
 import {Routes, Route} from "react-router-dom";
+import {useAppDispatch} from "../hooks/use-dispatch";
+import {remind} from "../store/reducers/session";
 import Layout from "../containers/layout";
+import Protected from "../containers/protected";
 import Login from "./login";
 import Profile from "./profile";
 import Events from "./events";
@@ -10,10 +14,16 @@ import Advice from "./advice";
 import Support from "./support";
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(remind())
+  })
+
   return (
     <Routes>
       <Route path="/login" element={<Login/>}/>
-      <Route path="/" element={<Layout/>}>
+      <Route path="/" element={<Protected redirect="/login"><Layout/></Protected>}>
         <Route index element={<Profile/>}/>
         <Route path="/events" element={<Events/>}/>
         <Route path="/events/:create-event" element={<CreateEvent/>}/>

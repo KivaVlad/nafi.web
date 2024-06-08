@@ -1,15 +1,19 @@
 import {memo, useState} from "react";
 import {NavLink} from "react-router-dom";
-import ProfileSvg from "../../assets/svg-icons/profile";
-import EventsSvg from "../../assets/svg-icons/events";
-import TarifsSvg from "../../assets/svg-icons/tarifs";
-import AdviceSvg from "../../assets/svg-icons/adviсe";
-import SupportSvg from "../../assets/svg-icons/support";
-import LogoutSvg from "../../assets/svg-icons/logout";
+import ProfileSvg from "../svg-icons/profile";
+import EventsSvg from "../svg-icons/events";
+import TarifsSvg from "../svg-icons/tarifs";
+import AdviceSvg from "../svg-icons/adviсe";
+import SupportSvg from "../svg-icons/support";
+import LogoutSvg from "../svg-icons/logout";
 import styles from "./style.module.scss";
 import "./style-nav.scss";
 
-const Navbar: React.FC = () => {
+interface IProps {
+  onLogout: () => void;
+}
+
+const Navbar: React.FC<IProps> = ({onLogout}) => {
   const [activeLink, setActiveLink] = useState<string>(sessionStorage.getItem('active') || '');
   const [link, setLink] = useState<string>(sessionStorage.getItem('URL') || "/events");
   sessionStorage.setItem('active', activeLink);
@@ -20,7 +24,11 @@ const Navbar: React.FC = () => {
       setLink(url);
       setActiveLink(param);
     },
-    onClose: () => setActiveLink('close')
+    onClose: () => setActiveLink('close'),
+    onOut: () => {
+      onLogout();
+      setActiveLink('close');
+    }
   }
 
   return (
@@ -60,7 +68,7 @@ const Navbar: React.FC = () => {
       </div>
 
       <div className={styles.logout}>
-        <NavLink to="/login" onClick={options.onClose} className={styles.link}>
+        <NavLink to="/login" onClick={options.onOut} className={styles.link}>
           <LogoutSvg/>
           Выйти
         </NavLink>

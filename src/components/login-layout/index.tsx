@@ -1,6 +1,4 @@
 import {memo} from "react";
-import AnimateLogo from "../login-animate-logo";
-import logo from "../../assets/animation.gif";
 import styles from "./style.module.scss";
 
 interface IProps {
@@ -10,22 +8,9 @@ interface IProps {
 const LoginLayout: React.FC<IProps> = ({children}) => {
   return (
     <div className={styles.wrapper}>
-
-      <div className={styles.up_section}>
-        <div className={styles.logo}>
-          <img src={logo} alt="logo" />
-        </div>
+      <div className={styles.content}>
+        {children}
       </div>
-
-      <div className={styles.down_section}>
-        <div className={styles.animate}>
-          <AnimateLogo/>
-        </div>
-        <div className={styles.form}>
-          {children}
-        </div>
-      </div>
-
     </div>
   )
 }

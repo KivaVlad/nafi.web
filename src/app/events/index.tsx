@@ -2,9 +2,10 @@ import {memo, useCallback} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppSelector} from "../../hooks/use-selector";
 import PageLayout from "../../components/page-layout";
-import PurpleButton from "../../components/purple-button";
+import Button from "../../components/button";
 import EventsList from "../../components/events-list";
 import EventCard from "../../components/event-card";
+import {plusIcon} from "../../assets/icons";
 import type {IEvent} from "../../types/i-event";
 
 const Events: React.FC = () => {
@@ -22,9 +23,8 @@ const Events: React.FC = () => {
   }
   
   return (
-    <PageLayout 
-      title="Создайте новое событие" 
-      button={<PurpleButton title="Создать" onClick={callbacks.onNavigate}/>}
+    <PageLayout title="Создайте новое событие" 
+      nav={<Button icon={plusIcon} title="Создать" onClick={callbacks.onNavigate}/>}
     >
       <EventsList list={list} renderItem={renders.item}/>
     </PageLayout>

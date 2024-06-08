@@ -3,11 +3,12 @@
   align-items: center;
   gap: 5px;
   font-size: 18px;
+  font-weight: 600;
   cursor: pointer;
-  transition: .2s ease;
   color: var(--purple-main);
 }
 
 .active svg path, .active svg g path {
+  stroke-width: 2;
   stroke: var(--purple-main);
 }

@@ -13,7 +13,7 @@ const initialState: IState = {
     username: 'Владимир',
     lastname: 'Смирнов',
     surname: 'Иванович',
-    job: 'Преподавалель английского языка',
+    job: 'Образовательная организация (школа, вуз и пр.)',
     email: 'vladimirsmirnov@mail.ru',
     tel: '+79295555252',
     org: 'SkyEng',
