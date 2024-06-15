@@ -1,6 +1,9 @@
 import {API_BASE_URL} from "../config";
 import {ISession} from "../types/i-session";
 
+/**
+ * Функция восстановления сессии с помощью refresh токена
+ */
 async function remind() {
   const access = localStorage.getItem('access_token');
   if (access) {

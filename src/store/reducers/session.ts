@@ -21,8 +21,7 @@ const sessionSlice = createSlice({
   name: 'session',
   initialState,
   reducers: {
-    // Успешный вход
-    completedSignIn(state, action: PayloadAction<ISession>) {
+    setSession(state, action: PayloadAction<ISession>) {
       state.access = action.payload.access;
       state.refresh = action.payload.refresh;
       localStorage.setItem('access_token', action.payload.access);
@@ -32,7 +31,6 @@ const sessionSlice = createSlice({
       state.errors = false;
     },
 
-    // Выход
     signOut(state) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
@@ -45,5 +43,5 @@ const sessionSlice = createSlice({
   },
 })
 
-export const {signOut, completedSignIn} = sessionSlice.actions;
+export const {signOut, setSession} = sessionSlice.actions;
 export default sessionSlice.reducer;
