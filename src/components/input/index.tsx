@@ -18,6 +18,7 @@ const Input: React.FC<IProps> = (props) => {
       <input 
         type={type}
         placeholder={placeholder}
+        autoComplete="off"
         value={value}
         onChange={(e) => onChange(e.target.value)}
       />

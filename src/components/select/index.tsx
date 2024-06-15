@@ -15,8 +15,8 @@ const Select: React.FC<IProps> = (props) => {
   const {label, value, setValue, options, placeholder} = props;
   let [active, setActive] = useState<boolean>(false);
 
-  function handleClick(item: string) {
-    setValue(item);
+  function handleClick(param: string) {
+    setValue(param);
     setActive(false);
   }
 
@@ -35,7 +35,7 @@ const Select: React.FC<IProps> = (props) => {
               <div 
                 key={item.id} 
                 className={styles.item}
-                onClick={() => handleClick(item.title)}
+                onClick={() => handleClick(item.value)}
               >
                 {item.title}
               </div>

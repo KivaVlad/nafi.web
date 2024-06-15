@@ -8,14 +8,14 @@ interface IProps {
 }
 
 const Protected: React.FC<IProps> = ({children, redirect}) => {
-  const {exists, access_token} = useAppSelector(state => state.session);
+  const {exists, access} = useAppSelector(state => state.session);
   const navigate = useNavigate();
   
   useEffect(() => {
-    if (!exists && !access_token) {
+    if (!exists && !access) {
       navigate(redirect);
     }
-  }, [exists, access_token])
+  }, [exists, access])
 
   return children;
 }

@@ -1,7 +1,5 @@
-import {useEffect} from "react";
 import {Routes, Route} from "react-router-dom";
-import {useAppDispatch} from "../hooks/use-dispatch";
-import {remind} from "../store/reducers/session";
+import {ROUTES} from "../config";
 import Layout from "../containers/layout";
 import Protected from "../containers/protected";
 import Login from "./login";
@@ -14,23 +12,17 @@ import Advice from "./advice";
 import Support from "./support";
 
 function App() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(remind())
-  })
-
   return (
     <Routes>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/" element={<Protected redirect="/login"><Layout/></Protected>}>
+      <Route path={ROUTES.LOGIN} element={<Login/>}/>
+      <Route path={ROUTES.PROFILE} element={<Protected redirect={ROUTES.LOGIN}><Layout/></Protected>}>
         <Route index element={<Profile/>}/>
-        <Route path="/events" element={<Events/>}/>
-        <Route path="/events/:create-event" element={<CreateEvent/>}/>
-        <Route path="/templates" element={<Templates/>}/>
-        <Route path="/tarifs" element={<Tarifs/>}/>
-        <Route path="/advice" element={<Advice/>}/>
-        <Route path="/support" element={<Support/>}/>
+        <Route path={ROUTES.EVENTS} element={<Events/>}/>
+        <Route path={ROUTES.CREATE_EVENT} element={<CreateEvent/>}/>
+        <Route path={ROUTES.TEMPLATES} element={<Templates/>}/>
+        <Route path={ROUTES.TARIFS} element={<Tarifs/>}/>
+        <Route path={ROUTES.ADVICE} element={<Advice/>}/>
+        <Route path={ROUTES.SUPPORT} element={<Support/>}/>
       </Route>
     </Routes>
   )

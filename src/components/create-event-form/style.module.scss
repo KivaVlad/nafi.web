@@ -81,3 +81,53 @@
     stroke: var(--gray-dark);
   }
 }
+
+.right {
+  display: flex;
+  flex-direction: column;
+  gap: 55px;
+}
+
+.tag_params {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.buttons_container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  
+  p {
+    font-size: 14px;
+  }
+
+  .buttons_three {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid var(--purple-main);
+      border-radius: 8px;
+      color: var(--purple-main);
+      padding: 6px 20px;
+      transition: .2s ease;
+
+      &:hover {
+        border: 1px solid var(--blue-light);
+        background-color: var(--blue-light);
+        color: var(--gray-dark);
+      }
+
+      &:hover svg path {
+        stroke: var(--gray-dark);
+      }
+    }
+  }
+}

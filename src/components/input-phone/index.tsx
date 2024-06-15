@@ -1,4 +1,4 @@
-import {memo, useState} from "react";
+import {memo} from "react";
 import styles from "./style.module.scss";
 
 interface IProps {
@@ -10,17 +10,15 @@ interface IProps {
 
 const Input: React.FC<IProps> = (props) => {
   const {label, placeholder, value, onChange} = props;
-  const [phone, setPhone] = useState(value);
 
   // Форматирование телефонного номера +X (XXX) XXX XX XX
   const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\D/g, '');
+    const currentValue = e.target.value.replace(/\D/g, '');
     let formattedPhoneNumber = '';
 
-    if (value.length <= 11) {
-      formattedPhoneNumber = `+7 (${value.slice(1, 4)}) ${value.slice(4, 7)} ${value.slice(7, 9)} ${value.slice(9)}`;
-      setPhone(formattedPhoneNumber);
-      onChange(phone);
+    if (currentValue.length <= 11) {
+      formattedPhoneNumber = `+7 (${currentValue.slice(1, 4)}) ${currentValue.slice(4, 7)} ${currentValue.slice(7, 9)} ${currentValue.slice(9)}`;
+      onChange(formattedPhoneNumber);
     }
   }
 
@@ -30,7 +28,7 @@ const Input: React.FC<IProps> = (props) => {
       <input 
         type='tel'
         placeholder={placeholder}
-        value={phone}
+        value={value}
         onChange={handlePhoneChange}
       />
     </div>
