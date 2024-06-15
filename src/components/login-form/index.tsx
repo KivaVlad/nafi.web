@@ -2,36 +2,36 @@ import {memo, useEffect, useState} from "react";
 import styles from "./styles.module.scss";
 
 interface IProps {
-  login: string;
+  email: string;
   password: string;
-  errors: string | null;
-  setLogin: (param: string) => void;
+  errors: boolean;
+  setEmail: (param: string) => void;
   setPassword: (param: string) => void;
   onSubmit: () => void;
 }
 
 const LoginForm: React.FC<IProps> = (props) => {
-  const {login, password, errors, setLogin, setPassword, onSubmit} = props;
+  const {email, password, errors, setEmail, setPassword, onSubmit} = props;
   const [active, setActive] = useState<boolean>(false);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     
-    if (login.trim() && password.trim()) {
+    if (email.trim() && password.trim()) {
       setActive(true);
       onSubmit();
-      setLogin('');
+      setEmail('');
       setPassword('');
     }
   }
 
   useEffect(() => {
-    if (login.trim() && password.trim()) {
+    if (email.trim() && password.trim()) {
       setActive(true);
     } else {
       setActive(false);
     }
-  }, [login, password])
+  }, [email, password])
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -41,8 +41,8 @@ const LoginForm: React.FC<IProps> = (props) => {
         <input type="text"
           className={!errors ? styles.input : styles.error_input}
           placeholder="Электронная почта"
-          value={login}
-          onChange={(e) => setLogin(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input type="password"
           className={!errors ? styles.input : styles.error_input}
@@ -50,7 +50,7 @@ const LoginForm: React.FC<IProps> = (props) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        {errors && <span className={styles.errors_message}>{errors}</span>}
+        {errors && <span className={styles.errors_message}>Неверный логин или пароль</span>}
         <span>Забыли пароль?</span>
       </div>
 

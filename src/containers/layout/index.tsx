@@ -17,7 +17,7 @@ const Layout: React.FC = () => {
 
   return (
     <>
-      <Header username={data.username}/>
+      <Header username={data.name}/>
       <LayoutWrapper navbar={<Navbar onLogout={callbacks.onLogout}/>} main={<Outlet/>}/>
     </>
   )

@@ -18,15 +18,15 @@ const VisitCard: React.FC<IProps> = ({user}) => {
 
       <div className={styles.card_container}>
         <div className={styles.user_wrapper}>
-          <h1>{`${user.username} ${user.lastname} ${user.surname}`}</h1>
+          <h1>{`${user.name || ''} ${user.lastname || ''} ${user.middlename || ''}`}</h1>
 
           <div className={styles.details_card_wrapper}>
             <div className={styles.left}>
-              <div className={styles.details}>{user.job}</div>
-              <div className={styles.details}>{formatPhoneNumber(user.tel)}</div>
+              <div className={styles.details}>{user.business_area}</div>
+              <div className={styles.details}>{formatPhoneNumber(user.phone)}</div>
             </div>
             <div className={styles.right}>
-              <div className={styles.details}>{user.org}</div>
+              <div className={styles.details}>{user.organization}</div>
               <div className={styles.details}>{user.email}</div>
             </div>
           </div>

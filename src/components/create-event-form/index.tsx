@@ -1,12 +1,15 @@
-import {memo, useState, useCallback} from "react";
+import {memo, useState} from "react";
 import {formatDate} from "../../utils/date-format";
 import Input from "../input";
 import Select from "../select";
 import Button from "../button";
 import SaveSvg from "../svg-icons/save";
-import {removeIcon, editIcon} from "../../assets/icons";
-import styles from "./style.module.scss";
+import ShareSvg from "../svg-icons/share";
+import DownloadIcon from "../svg-icons/download";
+import CopySvg from "../svg-icons/copy";
+import {removeIcon, editIcon, checkIcon, xIcon} from "../../assets/icons";
 import {eventsTypeOptions, numberParticipants} from "../../store/mock";
+import styles from "./style.module.scss";
 
 const CreateEventForm: React.FC = () => {
   const [eventName, setEventName] = useState<string>('');
@@ -16,10 +19,8 @@ const CreateEventForm: React.FC = () => {
   const [tag, setTag] = useState<string>('');
 
   const callbacks = {
-    onNavigate: useCallback(() => console.log('nav'), []),
-    onSave: useCallback(() => {
-      console.log({eventName, eventType, eventDate, participants});
-    }, [eventName, eventType, eventDate, participants]),
+    onNavigate: () => console.log('nav'),
+    onSave: () => console.log({eventName, eventType, eventDate, participants}),
   }
 
   function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
@@ -65,10 +66,41 @@ const CreateEventForm: React.FC = () => {
 
 
       <div className={styles.right}>
+
         <div className={styles.select_container}>
           <label>Придумайте тег для события*</label>
           <p>Этот тег необходимо будет показать участникам, чтобы они могли присоедениться к событию</p>
           <Input placeholder="#тэг" type="text" value={tag} onChange={setTag}/>
+          <div className={styles.tag_params}>
+            <img src={checkIcon} alt=""/>
+            <p>Тег свободен</p>
+          </div>
+          <div className={styles.tag_params}>
+            <img src={xIcon} alt=""/>
+            <p>Не более 6 символов</p>
+          </div>
+          <div className={styles.tag_params}>
+            <img src={xIcon} alt=""/>
+            <p>Тег должен быть на латинице</p>
+          </div>
+        </div>
+
+        <div className={styles.buttons_container}>
+          <p>Сообщите аудитории #тег (или код) вашего события или продемонстрируйте QR-код</p>
+          <div className={styles.buttons_three}>
+            <button type='button'>
+              <CopySvg/>
+              #тег
+            </button>
+            <button type='button'>
+              <DownloadIcon/>
+              QR-код
+            </button>
+            <button type='button'>
+              <ShareSvg/>
+              Ссылка
+            </button>
+          </div>
         </div>
       </div>
 

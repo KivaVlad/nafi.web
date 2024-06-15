@@ -1,6 +1,7 @@
-import {memo, useCallback} from "react";
+import {memo, useCallback, useEffect} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppSelector} from "../../hooks/use-selector";
+import {remind} from "../../api/remind";
 import PageLayout from "../../components/page-layout";
 import Button from "../../components/button";
 import EventsList from "../../components/events-list";
@@ -21,11 +22,13 @@ const Events: React.FC = () => {
       return <EventCard item={item}/>
     }, [])
   }
+
+  useEffect(() => {
+    remind()
+  }, [])
   
   return (
-    <PageLayout title="Создайте новое событие" 
-      nav={<Button icon={plusIcon} title="Создать" onClick={callbacks.onNavigate}/>}
-    >
+    <PageLayout title="Создайте новое событие" nav={<Button icon={plusIcon} title="Создать" onClick={callbacks.onNavigate}/>}>
       <EventsList list={list} renderItem={renders.item}/>
     </PageLayout>
   )

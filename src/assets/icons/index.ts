@@ -9,6 +9,8 @@ import saveIcon from "./save.svg";
 import arrowDownIcon from "./arrow-down.svg";
 import removeIcon from "./remove.svg";
 import editIcon from "./edit.svg";
+import xIcon from "./x-icon.svg";
+import checkIcon from "./check-icon.svg";
 
 export {
   logo,
@@ -22,4 +24,6 @@ export {
   arrowDownIcon,
   removeIcon,
   editIcon,
+  xIcon,
+  checkIcon,
 }
