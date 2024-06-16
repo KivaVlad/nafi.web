@@ -5,6 +5,7 @@ import type {ISelect} from "../../types/i-select";
 
 interface IProps {
   label?: string;
+  error?: string;
   value: string;
   options: ISelect[];
   placeholder?: string;
@@ -12,7 +13,7 @@ interface IProps {
 }
 
 const Select: React.FC<IProps> = (props) => {
-  const {label, value, setValue, options, placeholder} = props;
+  const {label, error, value, setValue, options, placeholder} = props;
   let [active, setActive] = useState<boolean>(false);
 
   function handleClick(param: string) {
@@ -25,10 +26,14 @@ const Select: React.FC<IProps> = (props) => {
       {label && <label>{label}</label>}
 
       <div className={styles.select_wrapper}>
-        <div className={styles.select} onClick={() => setActive(active = !active )}>
+        
+        <div className={!error ? styles.select : styles.error_select} onClick={() => setActive(active = !active )}>
           <span>{value ? value : placeholder}</span>
           <img className={!active ? styles.arrow_down : styles.arrow_up} src={arrowDownIcon} alt="" />
         </div>
+
+        {!!error && <span className={styles.error_text}>{error}</span>}
+
         {active && 
           <div className={styles.options_container}>
             {options.map((item) => (

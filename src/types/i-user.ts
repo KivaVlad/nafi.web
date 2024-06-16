@@ -1,11 +1,11 @@
 export interface IUser {
-  lastname: string | null;
+  lastname: string;
   name: string;
-  middlename: string | null;
+  middlename: string;
   business_area: string;
   phone: string;
   organization: string;
   entity: string;
-  id: number | null;
+  id: string;
   email: string;
 }

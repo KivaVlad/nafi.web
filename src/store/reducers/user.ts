@@ -17,7 +17,7 @@ const initialState: IState = {
     phone: '',
     organization: '',
     entity: '',
-    id: null,
+    id: '',
     email: '',
   },
   error: null,
@@ -65,6 +65,7 @@ const userSlice = createSlice({
         state.waiting = true;
       })
       .addCase(loadUser.fulfilled, (state, action: PayloadAction<IUser>) => {
+        state.data.id = action.payload.id.toString();
         state.data.name = action.payload.name;
         state.data.lastname = action.payload.lastname;
         state.data.middlename = action.payload.middlename;
