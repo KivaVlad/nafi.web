@@ -8,8 +8,8 @@ interface IProps {
 }
 
 const EventCard: React.FC<IProps> = ({item}) => {
-  const day = formatDate(item.date);
-  const time = formatTime(item.date);
+  const day = formatDate(item.start_date);
+  const time = formatTime(item.start_date);
   
   return (
     <div className={styles.card}>

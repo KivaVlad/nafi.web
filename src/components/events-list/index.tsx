@@ -8,7 +8,7 @@ interface IProps {
   renderItem: (item: IEvent) => React.ReactNode;
 }
 
-const EventsList: React.FC<IProps> = ({list, renderItem}) => {
+const EventsList: React.FC<IProps> = ({list, renderItem}) => {  
   return (
     <div className={styles.wrapper}>
 
@@ -20,13 +20,15 @@ const EventsList: React.FC<IProps> = ({list, renderItem}) => {
         </button>
       </div>
 
-      <div className={styles.list}>
-        {list.map(item =>
-          <div key={item.id}>
-            {renderItem(item)}
-          </div>
-        )}
-      </div>
+      {!!list.length &&
+        <div className={styles.list}>
+          {list?.map(item =>
+            <div key={item.id}>
+              {renderItem(item)}
+            </div>
+          )}
+        </div>
+      }
 
     </div>
   )

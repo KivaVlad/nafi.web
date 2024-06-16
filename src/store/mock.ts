@@ -22,7 +22,7 @@ export const eventsTypeOptions: ISelect[] = [
 ]
 
 export const numberParticipants: ISelect[] = [
-  {id: '1', title: 'До 30 слушателей', value: '30'},
-  {id: '2', title: 'До 100 слушателей', value: '100'},
-  {id: '3', title: 'До 1000 слушателей', value: '1000'},
+  {id: '1', title: 'До 30 слушателей', value: 'До 30 слушателей'},
+  {id: '2', title: 'До 100 слушателей', value: 'До 100 слушателей'},
+  {id: '3', title: 'До 1000 слушателей', value: 'До 1000 слушателей'},
 ]

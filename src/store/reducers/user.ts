@@ -24,6 +24,7 @@ const initialState: IState = {
   waiting: false
 }
 
+// Получение данных о пользователе
 const loadUser = createAsyncThunk<IUser, undefined>(
   'user/loadUser',
   async function () {
@@ -38,6 +39,7 @@ const loadUser = createAsyncThunk<IUser, undefined>(
   }
 )
 
+// Изменение данных пользователя
 const changeUserData = createAsyncThunk<IUser, IUser>(
   'user/changeUserData',
   async function(data) {
