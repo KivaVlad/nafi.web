@@ -1,19 +1,42 @@
 .card {
-  padding: 20px;
-  width: 100%;
+  padding: 20px 11px 12px 17px;
   height: 140px;
-  border-radius: 4px;
+  max-width: 276px;
+  border-radius: 12px;
+  border: 1px solid var(--purple-main);
   background-color: var(--white);
+  position: relative;
+}
+
+.edit {
+  position: absolute;
+  top: 11px;
+  right: 11px;
 }
 
 .date {
   display: flex;
   flex-direction: column;
-  gap: 10px;
 
   p {
     font-size: 18px;
     font-weight: 500;
-    color: var(--gray-900);
+    color: var(--purple-main);
   }
+}
+
+.title {
+  font-size: 14px;
+  color: var(--purple-medium);
+  margin-top: 20px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
 }

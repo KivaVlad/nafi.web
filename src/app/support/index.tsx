@@ -1,10 +1,11 @@
 import {memo} from "react";
 import PageLayout from "../../components/page-layout";
+import PageHead from "../../components/page-head";
 
 const Support: React.FC = () => {
   return (
-    <PageLayout title='Поддержка'>
-      <></>
+    <PageLayout>
+      <PageHead title='Поддержка'/>
     </PageLayout>
   )
 }

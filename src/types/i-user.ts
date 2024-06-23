@@ -6,6 +6,6 @@ export interface IUser {
   phone: string;
   organization: string;
   entity: string;
-  id: string;
+  id: number;
   email: string;
 }

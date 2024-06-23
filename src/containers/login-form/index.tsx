@@ -1,37 +1,53 @@
 import {memo, useEffect, useState} from "react";
+import {useAppDispatch} from "../../hooks/use-dispatch";
+import {useNavigate} from "react-router-dom";
+import {API_BASE_URL, ROUTES} from "../../config";
+import {setSession} from "../../store/reducers/session";
+import {IAuth} from "../../types/i-auth";
+import {ISession} from "../../types/i-session";
 import styles from "./styles.module.scss";
 
-interface IProps {
-  email: string;
-  password: string;
-  error: string;
-  setEmail: (param: string) => void;
-  setPassword: (param: string) => void;
-  onSubmit: () => void;
-}
+const LoginForm: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
-const LoginForm: React.FC<IProps> = (props) => {
-  const {email, password, error, setEmail, setPassword, onSubmit} = props;
-  // Состояние активности кнопки
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [error, setError] = useState<string>('');
   const [active, setActive] = useState<boolean>(false);
 
-  /**
-   * Отправка данных формы
-   */
+  async function signIn(data: IAuth) {
+    const response = await fetch(`${API_BASE_URL}/auth/jwt/create`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+    const json = await response.json() as ISession;
+    
+    if (response.ok) {
+      dispatch(setSession(json));
+      navigate(ROUTES.PROFILE);
+      setError('');
+    } else {
+      setError('Неверный логин или пароль');
+    }
+  }
+
+  // Отправка данных формы
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     
     if (email.trim() && password.trim()) {
       setActive(true);
-      onSubmit();
+      signIn({email, password});
       setEmail('');
       setPassword('');
     }
   }
 
-  /**
-   * Обработка ошибки для пустых строк
-   */
+  // Обработка ошибки для пустых строк
   useEffect(() => {
     if (email.trim() && password.trim()) {
       setActive(true);

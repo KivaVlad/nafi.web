@@ -1,59 +1,67 @@
-import {memo, useState, useEffect} from "react";
+import {memo, useState, useEffect, useRef} from "react";
+import {useAppDispatch} from "../../hooks/use-dispatch";
+import {useAppSelector} from "../../hooks/use-selector";
+import {create} from "../../store/reducers/events";
 import {formatDate} from "../../utils/date-format";
-import Input from "../input";
-import Select from "../select";
-import Button from "../button";
-import SaveSvg from "../svg-icons/save";
-import ShareSvg from "../svg-icons/share";
-import DownloadIcon from "../svg-icons/download";
-import CopySvg from "../svg-icons/copy";
+import Input from "../../components/input";
+import Select from "../../components/select";
+import Button from "../../components/button";
+import SaveSvg from "../../components/svg-icons/save";
+import ShareSvg from "../../components/svg-icons/share";
+import DownloadIcon from "../../components/svg-icons/download";
+import CopySvg from "../../components/svg-icons/copy";
+import UploadSvg from "../../components/svg-icons/upload";
 import {removeIcon, editIcon, checkIcon, xIcon} from "../../assets/icons";
 import {eventsTypeOptions, numberParticipants} from "../../store/mock";
 import styles from "./style.module.scss";
 
-interface IProps {
-  eventName: string;
-  eventType: string;
-  eventDate: string;
-  participants: string;
-  tag: string;
-  setEventName: (param: string) => void;
-  setEventType: (param: string) => void;
-  setEventDate: (param: string) => void;
-  setParticipants: (param: string) => void;
-  setTag: (param: string) => void;
-  onClick: () => void;
-}
+const CreateEventForm: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const {data} = useAppSelector(state => state.user);
+  const userId = String(data?.id);
+  const fileRef = useRef<HTMLInputElement | any>();
 
-const CreateEventForm: React.FC<IProps> = (props) => {
-  const {
-    eventName, eventType, eventDate, participants, tag,
-    setEventName, setEventType, setEventDate, setParticipants, setTag, onClick,
-  } = props;
+  const [eventName, setEventName] = useState<string>('');
+  const [eventType, setEventType] = useState<string>('');
+  const [eventDate, setEventDate] = useState<string>(new Date().toISOString());
+  const [participants, setParticipants] = useState<string>('');
+  const [pdf, setPdf] = useState<File | undefined>();
+  const [tag, setTag] = useState<string>('');
 
   const [errorEventName, setErrorEventName] = useState<string>('');
   const [errorEventType, setErrorEventType] = useState<string>('');
   const [errorEventDate, setErrorEventDate] = useState<string>('');
   const [errorParticipants, setErrorParticipants] = useState<string>('');
+  const [errorPdf, setErrorPdf] = useState<string>('');
   const [errorTag, setErrorTag] = useState<string>('');
 
-  const callbacks = {
-    onNavigate: () => {
-      validate();
+  // Чтоб вместо input мы видели блок с плюсом
+  function handlePick() {
+    fileRef.current.click();
+  }
 
-      if (validate()) {
-        onClick();
+  function onCreate() {
+    if (validate()) {
+      if (pdf) {
+        const formData = new FormData();
+        formData.append("pdf", pdf, pdf.name);
+        formData.append("title", eventName);
+        formData.append("start_date", eventDate);
+        formData.append("current_slide", "1");
+        formData.append("user", userId);
+        dispatch(create(formData));
       }
-    },
+    }
+  }
+
+  function onNavigate() {
+    validate();
   }
 
   function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     validate();
-
-    if (validate()) {
-      onClick();
-    }
+    onCreate();
   }
 
   function validate(): boolean {
@@ -61,6 +69,7 @@ const CreateEventForm: React.FC<IProps> = (props) => {
     let isValidEventName = false;
     let isValidEventType = false;
     let isValidEventDate = false;
+    let isValidPdf = false;
     let isValidParticipants = false;
     let isValidTag = false;
 
@@ -88,6 +97,14 @@ const CreateEventForm: React.FC<IProps> = (props) => {
       isValidEventDate = true;
     }
 
+    if (!pdf) {
+      setErrorPdf('Добавьте pdf файл');
+      isValidPdf = false;
+    } else {
+      setErrorPdf('');
+      isValidPdf = true;
+    }
+
     if (!participants.length) {
       setErrorParticipants('Обязательное поле');
       isValidParticipants = false;
@@ -104,7 +121,7 @@ const CreateEventForm: React.FC<IProps> = (props) => {
       isValidTag = true;
     }
 
-    if (isValidEventDate && isValidEventName && isValidEventType && isValidParticipants && isValidTag) {
+    if (isValidEventDate && isValidEventName && isValidEventType && isValidParticipants && isValidTag && isValidPdf) {
       isValid = true;
     }
     return isValid;
@@ -115,13 +132,15 @@ const CreateEventForm: React.FC<IProps> = (props) => {
     if (eventType.trim()) setErrorEventType('');
     if (eventDate.length) setErrorEventDate('');
     if (participants.trim()) setErrorParticipants('');
+    if (pdf) setErrorPdf('');
     if (tag.trim()) setErrorTag('');
-  }, [eventName, eventType, eventDate, participants, tag])
+  }, [eventName, eventType, eventDate, participants, pdf, tag])
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
 
       <div className={styles.left}>
+
         <div className={styles.left_head}>
           <h4>{formatDate(eventDate)}</h4>
           <button type='button'>
@@ -146,13 +165,15 @@ const CreateEventForm: React.FC<IProps> = (props) => {
             <Select placeholder="Выберите" error={errorParticipants} value={participants} setValue={setParticipants} options={numberParticipants} />
           </div>
         </div>
+        
         <div className={styles.left_buttons_wrapper}>
-          <Button type="button" icon={editIcon} title="К редактору" onClick={callbacks.onNavigate}/>
+          <Button type="button" icon={editIcon} title="К редактору" onClick={onNavigate}/>
           <button type='submit' className={styles.btn}>
             <SaveSvg/>
             Сохранить
           </button>
         </div>
+
       </div>
 
 
@@ -190,6 +211,32 @@ const CreateEventForm: React.FC<IProps> = (props) => {
             </button>
           </div>
         </div>
+
+        <div className={styles.down_buttons_container}>
+          <div className={styles.down_buttons__left}>
+            <p>Загрузите презентацию</p>
+            <button 
+              type='button' 
+              onClick={handlePick}
+              className={!errorPdf ? styles.file_btn : styles.error_file_btn}
+            >
+              <DownloadIcon/> Загрузить PDF
+            </button>
+            <input type='file' 
+              ref={fileRef}
+              onChange={(e) => setPdf(e.target.files?.[0])}
+              className={styles.hidden}
+              accept=".pdf"
+            />
+          </div>
+          <div className={styles.down_buttons__right}>
+            <p>Выгрузите отчет по событию </p>
+            <button type='button' className={styles.btn}>
+              <UploadSvg/> Выгрузить
+            </button>
+          </div>
+        </div>
+
       </div>
 
     </form>

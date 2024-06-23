@@ -8,18 +8,22 @@ interface IState {
   waiting: boolean;
 }
 
+const storageUser = localStorage.getItem('user');
+
 const initialState: IState = {
-  data: {
-    lastname: '',
-    name: '',
-    middlename: '',
-    business_area: '',
-    phone: '',
-    organization: '',
-    entity: '',
-    id: '',
-    email: '',
-  },
+  data: storageUser 
+  ? JSON.parse(storageUser)
+  : {
+      lastname: '',
+      name: '',
+      middlename: '',
+      business_area: '',
+      phone: '',
+      organization: '',
+      entity: '',
+      id: 0,
+      email: '',
+    },
   error: null,
   waiting: false
 }
@@ -67,15 +71,8 @@ const userSlice = createSlice({
         state.waiting = true;
       })
       .addCase(loadUser.fulfilled, (state, action: PayloadAction<IUser>) => {
-        state.data.id = action.payload.id.toString();
-        state.data.name = action.payload.name;
-        state.data.lastname = action.payload.lastname;
-        state.data.middlename = action.payload.middlename;
-        state.data.email = action.payload.email;
-        state.data.business_area = action.payload.business_area;
-        state.data.entity = action.payload.entity;
-        state.data.organization = action.payload.organization;
-        state.data.phone = action.payload.phone;
+        state.data = action.payload;
+        localStorage.setItem('user', JSON.stringify(action.payload));
         state.error = null;
         state.waiting = false;
       })
@@ -89,14 +86,8 @@ const userSlice = createSlice({
         state.waiting = true;
       })
       .addCase(changeUserData.fulfilled, (state, action: PayloadAction<IUser>) => {
-        state.data.name = action.payload.name;
-        state.data.lastname = action.payload.lastname;
-        state.data.middlename = action.payload.middlename;
-        state.data.email = action.payload.email;
-        state.data.business_area = action.payload.business_area;
-        state.data.entity = action.payload.entity;
-        state.data.organization = action.payload.organization;
-        state.data.phone = action.payload.phone;
+        state.data = action.payload;
+        localStorage.setItem('user', JSON.stringify(action.payload));
         state.error = null;
         state.waiting = false;
       })

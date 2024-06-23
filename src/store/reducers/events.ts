@@ -30,26 +30,46 @@ export const load = createAsyncThunk<IEvent[], undefined>(
 )
 
 // Создание нового события
-export const create = createAsyncThunk<IEvent, IEvent>(
+export const create = createAsyncThunk<IEvent, any>(
   'events/createEvent',
-  async function(data) {
+  async function(formData) {
+    const headers = new Headers();
+  headers.append("Authorization", `Bearer ${localStorage.getItem('access_token')}`);
     const response = await fetch(`${API_BASE_URL}/api/events/`, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
-      },
-      body: JSON.stringify(data)
+      headers,
+      body: formData,
     })
     const json = await response.json();
     return json;
   }
 )
 
+// Удаление события
+export const removeEvent = createAsyncThunk<undefined, number>(
+  'events/removeEvent',
+  async function(id) {
+    const response = await fetch(`${API_BASE_URL}/api/events/${id}/`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+      }
+    })
+    const data = await response.json();
+    return data;
+  }
+)
+
 const eventsSlice = createSlice({
   name: 'events',
   initialState,
-  reducers: {},
+  reducers: {
+    // Удаление события
+    onRemoveEvent(state, action: PayloadAction<number>) {
+      state.list = state.list.filter((item) => item.id !== action.payload);
+    }
+  },
   extraReducers(builder) {
     builder
       // Получение списка событий 
@@ -81,4 +101,5 @@ const eventsSlice = createSlice({
   },
 })
 
+export const {onRemoveEvent} = eventsSlice.actions;
 export default eventsSlice.reducer;

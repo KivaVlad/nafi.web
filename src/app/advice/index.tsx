@@ -1,10 +1,11 @@
 import {memo} from "react";
 import PageLayout from "../../components/page-layout";
+import PageHead from "../../components/page-head";
 
 const Advice: React.FC = () => {
   return (
-    <PageLayout title='Советы'>
-      <></>
+    <PageLayout>
+      <PageHead title="Советы"/>
     </PageLayout>
   )
 }
