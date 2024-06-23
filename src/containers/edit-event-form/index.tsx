@@ -1,7 +1,10 @@
 import {memo, useState, useEffect, useRef} from "react";
+import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../hooks/use-dispatch";
 import {useAppSelector} from "../../hooks/use-selector";
+import {removeEvent, onRemoveEvent} from "../../store/reducers/events";
 import {formatDate} from "../../utils/date-format";
+import {ROUTES} from "../../config";
 import Input from "../../components/input";
 import Select from "../../components/select";
 import Button from "../../components/button";
@@ -21,6 +24,7 @@ interface IProps {
 
 const EditEventForm: React.FC<IProps> = ({event}) => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {data} = useAppSelector(state => state.user);
   const fileRef = useRef<HTMLInputElement | any>();
 
@@ -39,23 +43,27 @@ const EditEventForm: React.FC<IProps> = ({event}) => {
   const [errorTag, setErrorTag] = useState<string>('');
 
   useEffect(() => {
-    if (event) {
+    if (event.id) {
       setEventName(event.title);
     }
   }, [event])
 
-  // Чтоб вместо input мы видели блок с плюсом
-  function handlePick() {
-    fileRef.current.click();
-  }
-
-  function onCreate() {
-    if (validate()) {
-      const formData = new FormData();
-      if (pdf) {
-        formData.append("pdf", pdf);
-        console.log({ title: eventName, start_date: eventDate, user: data.id });
+  const callbacks = {
+    // Редактирование события
+    onEdit: () => {
+      if (validate()) {
+        const formData = new FormData();
+        if (pdf) {
+          formData.append("pdf", pdf);
+          console.log({ title: eventName, start_date: eventDate, user: data.id });
+        }
       }
+    },
+    // Удаление события
+    onRemove: () => {
+      dispatch(removeEvent(event.id));
+      dispatch(onRemoveEvent(event.id));
+      navigate(ROUTES.EVENTS);
     }
   }
 
@@ -66,7 +74,7 @@ const EditEventForm: React.FC<IProps> = ({event}) => {
   function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     validate();
-    onCreate();
+    callbacks.onEdit();
   }
 
   function validate(): boolean {
@@ -147,7 +155,7 @@ const EditEventForm: React.FC<IProps> = ({event}) => {
       <div className={styles.left}>
         <div className={styles.left_head}>
           <h4>{formatDate(eventDate)}</h4>
-          <button type='button'>
+          <button type='button' onClick={callbacks.onRemove}>
             Удалить событие 
             <img src={removeIcon} alt=""/>
           </button>
@@ -219,7 +227,7 @@ const EditEventForm: React.FC<IProps> = ({event}) => {
             <p>Загрузите презентацию</p>
             <button 
               type='button' 
-              onClick={handlePick}
+              onClick={() => fileRef.current.click()}
               className={!errorPdf ? styles.file_btn : styles.error_file_btn}
             >
               <DownloadIcon/> Загрузить PDF
