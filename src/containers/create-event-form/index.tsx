@@ -11,7 +11,7 @@ import ShareSvg from "../../components/svg-icons/share";
 import DownloadIcon from "../../components/svg-icons/download";
 import CopySvg from "../../components/svg-icons/copy";
 import UploadSvg from "../../components/svg-icons/upload";
-import {removeIcon, editIcon, checkIcon, xIcon} from "../../assets/icons";
+import {editIcon, checkIcon, xIcon} from "../../assets/icons";
 import {eventsTypeOptions, numberParticipants} from "../../store/mock";
 import styles from "./style.module.scss";
 
@@ -34,11 +34,6 @@ const CreateEventForm: React.FC = () => {
   const [errorParticipants, setErrorParticipants] = useState<string>('');
   const [errorPdf, setErrorPdf] = useState<string>('');
   const [errorTag, setErrorTag] = useState<string>('');
-
-  // Чтоб вместо input мы видели блок с плюсом
-  function handlePick() {
-    fileRef.current.click();
-  }
 
   function onCreate() {
     if (validate()) {
@@ -143,10 +138,6 @@ const CreateEventForm: React.FC = () => {
 
         <div className={styles.left_head}>
           <h4>{formatDate(eventDate)}</h4>
-          <button type='button'>
-            Удалить событие 
-            <img src={removeIcon} alt=""/>
-          </button>
         </div>
         <div className={styles.left_main}>
           <Input label="Название события*" type="text" error={errorEventName} placeholder="Введите название события" value={eventName} onChange={setEventName}/>
@@ -217,7 +208,7 @@ const CreateEventForm: React.FC = () => {
             <p>Загрузите презентацию</p>
             <button 
               type='button' 
-              onClick={handlePick}
+              onClick={() => fileRef.current?.click()}
               className={!errorPdf ? styles.file_btn : styles.error_file_btn}
             >
               <DownloadIcon/> Загрузить PDF

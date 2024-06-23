@@ -16,10 +16,9 @@ const CreateEvent: React.FC = () => {
   return (
     <PageLayout>
       <PageHead title="Событие"/>
-      {waiting
-        ? <Loader/>
-        : <CreateEventForm/>
-      }
+      <Loader active={waiting}>
+        <CreateEventForm/>
+      </Loader>
     </PageLayout>
   )
 }

@@ -51,7 +51,7 @@ const ProfileForm: React.FC<IProps> = ({data}) => {
 
   // Обновление внутреннего стейта, если передан объект пользовалеля
   useEffect(() => {
-    if (data) {
+    if (data.id) {
       setName(data.name);
       setLastname(data.lastname);
       setMiddlename(data.middlename);

@@ -1,6 +1,7 @@
 import {memo, useEffect} from 'react';
 import {useAppSelector} from '../../hooks/use-selector';
 import {useNavigate} from 'react-router-dom';
+import Loader from "../../components/loader";
 
 interface IProps {
   children: React.ReactNode;
@@ -8,7 +9,7 @@ interface IProps {
 }
 
 const Protected: React.FC<IProps> = ({children, redirect}) => {
-  const {exists, access} = useAppSelector(state => state.session);
+  const {exists, access, waiting} = useAppSelector(state => state.session);
   const navigate = useNavigate();
   
   useEffect(() => {
@@ -17,7 +18,15 @@ const Protected: React.FC<IProps> = ({children, redirect}) => {
     }
   }, [exists, access])
 
-  return children;
+  if (!exists && waiting) {
+    return (
+      <Loader active={waiting}>
+        {children}
+      </Loader>
+    )
+  } else {
+    return children;
+  }
 }
 
 export default memo(Protected);

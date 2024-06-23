@@ -1,12 +1,21 @@
 import {memo} from "react";
 import styles from "./style.module.scss";
 
-const Loader: React.FC = () => {
-  return (
-    <div className={styles.loader}>
-      <div className={styles.spinner}></div>
-    </div>
-  )
+interface IProps {
+  children: React.ReactNode;
+  active: boolean;
+}
+
+const Loader: React.FC<IProps> = ({active, children}) => {
+  if (active) {
+    return (
+      <div className={styles.loader}>
+        <div className={styles.spinner}></div>
+      </div>
+    )
+  } else {
+    return children;
+  }
 }
 
 export default memo(Loader);
