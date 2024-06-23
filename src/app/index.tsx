@@ -10,6 +10,7 @@ import Templates from "./templates";
 import Tarifs from "./tarifs";
 import Advice from "./advice";
 import Support from "./support";
+import EditEvent from "./edit-event";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route index element={<Profile/>}/>
         <Route path={ROUTES.EVENTS} element={<Events/>}/>
         <Route path={ROUTES.CREATE_EVENT} element={<CreateEvent/>}/>
+        <Route path={ROUTES.EDIT_EVENT} element={<EditEvent/>}/>
         <Route path={ROUTES.TEMPLATES} element={<Templates/>}/>
         <Route path={ROUTES.TARIFS} element={<Tarifs/>}/>
         <Route path={ROUTES.ADVICE} element={<Advice/>}/>

@@ -5,6 +5,7 @@ import {useAppDispatch} from "../../hooks/use-dispatch";
 import {remind} from "../../store/reducers/session";
 import {load} from "../../store/reducers/events";
 import PageLayout from "../../components/page-layout";
+import PageHead from "../../components/page-head";
 import Button from "../../components/button";
 import EventsList from "../../components/events-list";
 import EventCard from "../../components/event-card";
@@ -32,7 +33,9 @@ const Events: React.FC = () => {
   }
   
   return (
-    <PageLayout title="Создайте новое событие" nav={<Button icon={plusIcon} title="Создать" onClick={callbacks.onNavigate}/>}>
+    <PageLayout>
+      <PageHead title="Создайте новое событие" 
+          nav={<Button icon={plusIcon} title="Создать" onClick={callbacks.onNavigate}/>}/>
       <EventsList list={list} renderItem={renders.item}/>
     </PageLayout>
   )

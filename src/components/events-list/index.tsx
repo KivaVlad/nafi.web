@@ -20,15 +20,13 @@ const EventsList: React.FC<IProps> = ({list, renderItem}) => {
         </button>
       </div>
 
-      {!!list.length &&
-        <div className={styles.list}>
-          {list?.map(item =>
-            <div key={item.id}>
-              {renderItem(item)}
-            </div>
-          )}
-        </div>
-      }
+      <div className={styles.list}>
+        {list?.map(item =>
+          <div key={item.id}>
+            {renderItem(item)}
+          </div>
+        )}
+      </div>
 
     </div>
   )

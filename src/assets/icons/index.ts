@@ -11,6 +11,9 @@ import removeIcon from "./remove.svg";
 import editIcon from "./edit.svg";
 import xIcon from "./x-icon.svg";
 import checkIcon from "./check-icon.svg";
+import playIcon from "./play.svg";
+import copyIcon from "./icon-copy.svg";
+import trashIcon from "./trash.svg";
 
 export {
   logo,
@@ -26,4 +29,7 @@ export {
   editIcon,
   xIcon,
   checkIcon,
+  playIcon,
+  copyIcon,
+  trashIcon,
 }

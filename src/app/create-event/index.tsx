@@ -1,42 +1,25 @@
-import {memo, useState, useEffect, useCallback} from "react";
-import {useAppDispatch} from "../../hooks/use-dispatch";
-import {useAppSelector} from "../../hooks/use-selector";
-import {create} from "../../store/reducers/events";
+import {memo, useEffect} from "react";
 import {remind} from "../../store/reducers/session";
+import {useAppSelector} from "../../hooks/use-selector";
 import PageLayout from "../../components/page-layout";
-import CreateEventForm from "../../components/create-event-form";
+import PageHead from "../../components/page-head";
+import CreateEventForm from "../../containers/create-event-form";
+import Loader from "../../components/loader";
 
 const CreateEvent: React.FC = () => {
-  const dispatch = useAppDispatch();
-  const {data} = useAppSelector(state => state.user);
-
-  const [eventName, setEventName] = useState<string>('');
-  const [eventType, setEventType] = useState<string>('');
-  const [eventDate, setEventDate] = useState<string>(new Date().toISOString());
-  const [participants, setParticipants] = useState<string>('');
-  const [tag, setTag] = useState<string>('');
+  const {waiting} = useAppSelector(state => state.events);
 
   useEffect(() => {
     remind()
   }, [])
 
-  const callbacks = {
-    // Создание события
-    onCreate: useCallback(() => {
-      dispatch(create({
-        title: eventName,
-        start_date: eventDate,
-        user: data.id
-      }))
-    }, [eventName, eventDate])
-  }
-
   return (
-    <PageLayout title="Событие">
-      <CreateEventForm eventName={eventName} eventType={eventType} eventDate={eventDate} 
-        participants={participants} tag={tag} setEventName={setEventName} setEventType={setEventType}
-        setEventDate={setEventDate} setParticipants={setParticipants} setTag={setTag} onClick={callbacks.onCreate}
-      />
+    <PageLayout>
+      <PageHead title="Событие"/>
+      {waiting
+        ? <Loader/>
+        : <CreateEventForm/>
+      }
     </PageLayout>
   )
 }

@@ -1,8 +1,8 @@
 export interface IEvent {
-  id?: number;
+  id: number;
   title: string;
   start_date: string;
-  pdf?: object;
+  pdf?: any;
   current_slide?: number;
-  user?: string;
+  user?: number;
 }

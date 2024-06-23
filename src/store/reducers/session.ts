@@ -72,6 +72,7 @@ const sessionSlice = createSlice({
     signOut(state) {
       localStorage.removeItem('access_token');
       localStorage.removeItem('refresh_token');
+      localStorage.removeItem('user');
       state.access = '',
       state.refresh = '', 
       state.waiting = false,

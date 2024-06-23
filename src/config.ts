@@ -5,6 +5,7 @@ export const ROUTES = {
   LOGIN: '/login',
   EVENTS: '/events',
   CREATE_EVENT: '/events/:create-event',
+  EDIT_EVENT: '/events/edit/:id',
   TEMPLATES: '/templates',
   TARIFS: '/tarifs',
   ADVICE: '/advice',
