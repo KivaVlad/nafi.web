@@ -63,7 +63,7 @@ const EditEventForm: React.FC<IProps> = ({event}) => {
         // Устанавливаем режим ожидания
         dispatch(setWaiting());
         // Редактируем события
-        editEvent(formData)
+        editEvent(event.id, formData)
         .then((res) => {
           dispatch(onSuccessCreate(res));
           navigate(redirect);
