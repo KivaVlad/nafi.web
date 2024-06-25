@@ -1,0 +1,21 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--purple-medium);
+  cursor: pointer;
+  transition: .1s ease;
+}

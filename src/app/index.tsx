@@ -11,11 +11,13 @@ import Tarifs from "./tarifs";
 import Advice from "./advice";
 import Support from "./support";
 import EditEvent from "./edit-event";
+import Editor from "./editor";
 
 function App() {
   return (
     <Routes>
       <Route path={ROUTES.LOGIN} element={<Login/>}/>
+      <Route path={ROUTES.EDITOR} element={<Editor/>}/>
       <Route path={ROUTES.PROFILE} element={<Protected redirect={ROUTES.LOGIN}><Layout/></Protected>}>
         <Route index element={<Profile/>}/>
         <Route path={ROUTES.EVENTS} element={<Events/>}/>

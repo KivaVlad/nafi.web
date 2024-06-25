@@ -8,9 +8,7 @@ interface IProps {
 const PageLayout: React.FC<IProps> = ({children}) => {
   return (
     <div className={styles.wrapper}>
-      <div className={styles.content}>
-        {children}
-      </div>
+      {children}
     </div>
   )
 }

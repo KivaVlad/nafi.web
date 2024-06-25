@@ -2,7 +2,7 @@ import {memo, useState, useEffect, useRef} from "react";
 import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../hooks/use-dispatch";
 import {useAppSelector} from "../../hooks/use-selector";
-import {removeEvent, onRemoveEvent} from "../../store/reducers/events";
+import {editEvent, onSuccessCreate, setWaiting, onError, removeEvent, onRemoveEvent} from "../../store/reducers/events";
 import {formatDate} from "../../utils/date-format";
 import {ROUTES} from "../../config";
 import Input from "../../components/input";
@@ -26,6 +26,7 @@ const EditEventForm: React.FC<IProps> = ({event}) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {data} = useAppSelector(state => state.user);
+  const userId  = String(data.id);
   const fileRef = useRef<HTMLInputElement | any>();
 
   const [eventName, setEventName] = useState<string>('');
@@ -48,35 +49,55 @@ const EditEventForm: React.FC<IProps> = ({event}) => {
     }
   }, [event])
 
-  const callbacks = {
-    // Редактирование события
-    onEdit: () => {
-      if (validate()) {
+  // Редактирование события
+  function onEdit(redirect = ROUTES.EVENTS) {
+    if (validate()) {
+      if (pdf) {
+        // Добавляем все необходимые данные в FormData
         const formData = new FormData();
-        if (pdf) {
-          formData.append("pdf", pdf);
-          console.log({ title: eventName, start_date: eventDate, user: data.id });
-        }
+        formData.append("pdf", pdf, pdf.name);
+        formData.append("title", eventName);
+        formData.append("start_date", eventDate);
+        formData.append("current_slide", "1");
+        formData.append("user", userId);
+        // Устанавливаем режим ожидания
+        dispatch(setWaiting());
+        // Редактируем события
+        editEvent(formData)
+        .then((res) => {
+          dispatch(onSuccessCreate(res));
+          navigate(redirect);
+        })
+        .catch(() => dispatch(onError()))
       }
-    },
-    // Удаление события
-    onRemove: () => {
-      dispatch(removeEvent(event.id));
-      dispatch(onRemoveEvent(event.id));
-      navigate(ROUTES.EVENTS);
     }
   }
 
-  function onNavigate() {
-    validate();
+  // Удаление события
+  function onRemove() {
+    dispatch(removeEvent(event.id));
+    dispatch(onRemoveEvent(event.id));
+    navigate(ROUTES.EVENTS);
   }
 
+  // При переходе в редактор
+  function onNavigate() {
+    validate();
+    if (event.title !== eventName) {
+      onEdit(`/events/editor/${event.id}`);
+    } else {
+      navigate(`/events/editor/${event.id}`);
+    }
+  }
+
+  // Отправка данных формы
   function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
     e.preventDefault();
     validate();
-    callbacks.onEdit();
+    onEdit();
   }
 
+  // Валидация полей
   function validate(): boolean {
     let isValid = false;
     let isValidEventName = false;
@@ -155,7 +176,7 @@ const EditEventForm: React.FC<IProps> = ({event}) => {
       <div className={styles.left}>
         <div className={styles.left_head}>
           <h4>{formatDate(eventDate)}</h4>
-          <button type='button' onClick={callbacks.onRemove}>
+          <button type='button' onClick={onRemove}>
             Удалить событие 
             <img src={removeIcon} alt=""/>
           </button>
