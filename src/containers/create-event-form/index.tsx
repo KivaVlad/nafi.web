@@ -1,8 +1,10 @@
 import {memo, useState, useEffect, useRef} from "react";
+import {useNavigate} from "react-router-dom";
 import {useAppDispatch} from "../../hooks/use-dispatch";
 import {useAppSelector} from "../../hooks/use-selector";
-import {create} from "../../store/reducers/events";
+import {createEvent, setWaiting, onSuccessCreate, onError} from "../../store/reducers/events";
 import {formatDate} from "../../utils/date-format";
+import {ROUTES} from "../../config";
 import Input from "../../components/input";
 import Select from "../../components/select";
 import Button from "../../components/button";
@@ -17,7 +19,9 @@ import styles from "./style.module.scss";
 
 const CreateEventForm: React.FC = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {data} = useAppSelector(state => state.user);
+  const {waiting} = useAppSelector(state => state.events);
   const userId = String(data?.id);
   const fileRef = useRef<HTMLInputElement | any>();
 
@@ -35,30 +39,58 @@ const CreateEventForm: React.FC = () => {
   const [errorPdf, setErrorPdf] = useState<string>('');
   const [errorTag, setErrorTag] = useState<string>('');
 
-  function onCreate() {
+  // Отправка данных формы
+  function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
+    e.preventDefault();
+    validate();
     if (validate()) {
       if (pdf) {
+        // Добавляем все необходимые данные в FormData
         const formData = new FormData();
         formData.append("pdf", pdf, pdf.name);
         formData.append("title", eventName);
         formData.append("start_date", eventDate);
         formData.append("current_slide", "1");
         formData.append("user", userId);
-        dispatch(create(formData));
+        // Устанавливаем режим ожидания
+        dispatch(setWaiting());
+        // Создание нового события
+        createEvent(formData)
+        .then((res) => {
+          dispatch(onSuccessCreate(res));
+          navigate(ROUTES.EVENTS);
+        })
+        .catch(() => dispatch(onError()))
       }
     }
   }
 
+  // При переходе в редактор
   function onNavigate() {
     validate();
+    if (validate()) {
+      if (pdf) {
+        // Добавляем все необходимые данные в FormData
+        const formData = new FormData();
+        formData.append("pdf", pdf, pdf.name);
+        formData.append("title", eventName);
+        formData.append("start_date", eventDate);
+        formData.append("current_slide", "1");
+        formData.append("user", userId);
+        // Устанавливаем режим ожидания
+        dispatch(setWaiting());
+        // Создание нового события
+        createEvent(formData)
+        .then((res) => {
+          dispatch(onSuccessCreate(res));
+          navigate(`/events/editor/${res.id}`);
+        })
+        .catch(() => dispatch(onError()))
+      }
+    }
   }
 
-  function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
-    e.preventDefault();
-    validate();
-    onCreate();
-  }
-
+  // Валидация полей
   function validate(): boolean {
     let isValid = false;
     let isValidEventName = false;
@@ -158,8 +190,12 @@ const CreateEventForm: React.FC = () => {
         </div>
         
         <div className={styles.left_buttons_wrapper}>
-          <Button type="button" icon={editIcon} title="К редактору" onClick={onNavigate}/>
-          <button type='submit' className={styles.btn}>
+          <Button type="button" disabled={waiting} icon={editIcon} title="К редактору" onClick={onNavigate}/>
+          <button 
+            type='submit' 
+            className={styles.btn}
+            disabled={waiting}
+            >
             <SaveSvg/>
             Сохранить
           </button>

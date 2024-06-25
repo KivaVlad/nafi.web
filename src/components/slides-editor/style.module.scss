@@ -1,0 +1,149 @@
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 66px;
+  border-bottom: 1px solid rgba(0, 1, 70, 0.28);
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+  margin-left: 38px;
+
+  h3 {
+    font-size: 28px;
+    font-weight: 500;
+  }
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  max-width: 353px;
+  width: 100%;
+  height: 100%;
+  border-left: 1px solid rgba(0, 1, 70, 0.28);
+
+  .nav_link {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--gray);
+  }
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+  max-width: 188px;
+  width: 100%;
+  height: calc(100vh - (92px + 66px));
+  padding: 65px 22px 22px 22px;
+  border-right: 1px solid rgba(0, 1, 70, 0.28);
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--blue-light);
+    height: .5rem;
+  }
+
+  &::-moz-progress-bar {
+    background-color: var(--blue-light);
+    width: 4px;
+    height: .5rem;
+  }
+}
+
+.slide_card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+
+  span {
+    font-size: 15px;
+  }
+
+  .sm_image, .active_sm_image {
+    border-radius: 4px;
+    overflow: hidden;
+    width: 120px;
+    height: auto;
+    border: 3px solid transparent;
+  }
+
+  .active_sm_image {
+    border: 2px solid var(--purple-main);
+  }
+}
+
+.working_zone {
+  padding: 64px 40px;
+}
+
+.big_image {
+  width: 100%;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  border: 3px solid var(--purple-main);
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.options {
+  max-width: 353px;
+  padding: 20px;
+  width: 100%;
+  border-left: 1px solid rgba(0, 1, 70, 0.28);
+}
+
+.general_setting {
+
+  h3 {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 14px;
+  }
+
+  .option_buttons {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    button {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 87px;
+      height: 87px;
+      border-radius: 10px;
+      font-size: 10px;
+      color: var(--purple-main);
+      background-color: var(--white);
+    }
+  }
+}

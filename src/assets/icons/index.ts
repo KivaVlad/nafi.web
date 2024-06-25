@@ -14,6 +14,15 @@ import checkIcon from "./check-icon.svg";
 import playIcon from "./play.svg";
 import copyIcon from "./icon-copy.svg";
 import trashIcon from "./trash.svg";
+import arrowBackIcon from "./arrow-back.svg";
+import uploadIcom from "./send-square.svg";
+import copySuccessIcon from "./copy-success.svg";
+import timerIcon from "./timer.svg";
+import notificationIcon from "./notification.svg";
+import linksIcon from "./link.svg";
+import translateIcon from "./translate.svg";
+import chartIcon from "./chart.svg";
+import messagesIcon from "./messages-3.svg";
 
 export {
   logo,
@@ -32,4 +41,13 @@ export {
   playIcon,
   copyIcon,
   trashIcon,
+  arrowBackIcon,
+  uploadIcom,
+  copySuccessIcon,
+  timerIcon,
+  notificationIcon,
+  linksIcon,
+  translateIcon,
+  chartIcon,
+  messagesIcon,
 }
