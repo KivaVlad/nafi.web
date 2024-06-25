@@ -23,7 +23,7 @@ const ProfileForm: React.FC<IProps> = ({data}) => {
   const [lastname, setLastname] = useState<string>('');
   const [middlename, setMiddlename] = useState<string>('');
   const [email, setEmail] = useState<string>('');
-  const [entity, setEntity] = useState<string>('');
+  const [entity, setEntity] = useState<string>('Физическое лицо');
   const [organization, setOrganization] = useState<string>('');
   const [business, setBusiness] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -40,10 +40,11 @@ const ProfileForm: React.FC<IProps> = ({data}) => {
       if (validate()) {
         dispatch(changeUserData({
           name, lastname, middlename, 
-          email, entity, organization, 
+          email, organization, 
           business_area: business,
           phone: formattedPhone(phone),
           id: data.id, 
+          entity: 'LP',
         }))
       }
     }, [name, lastname, middlename, email, entity, organization, business, phone, data])
@@ -56,7 +57,6 @@ const ProfileForm: React.FC<IProps> = ({data}) => {
       setLastname(data.lastname);
       setMiddlename(data.middlename);
       setEmail(data.email);
-      setEntity(data.entity);
       setOrganization(data.organization);
       setBusiness(data.business_area);
       setPhone(formatPhoneNumber(data.phone));

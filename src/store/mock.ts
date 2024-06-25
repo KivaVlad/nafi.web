@@ -1,8 +1,8 @@
 import {ISelect} from "../types/i-select"
 
 export const entityOptions: ISelect[] = [
-  {id: '1', title: 'Физическое лицо', value: 'LP'},
-  {id: '2', title: 'Юридическое лицо', value: 'LP'},
+  {id: '1', title: 'Физическое лицо', value: 'Физическое лицо'},
+  {id: '2', title: 'Юридическое лицо', value: 'Юридическое лицо'},
 ]
 
 export const jobOptions: ISelect[] = [

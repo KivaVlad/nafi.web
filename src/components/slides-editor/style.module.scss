@@ -10,13 +10,16 @@
 .title {
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 25px;
   margin-left: 38px;
 
   h3 {
     font-size: 28px;
     font-weight: 500;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: 500px;
   }
 }
 
@@ -146,4 +149,8 @@
       background-color: var(--white);
     }
   }
+}
+
+.hidden {
+  display: none;
 }
