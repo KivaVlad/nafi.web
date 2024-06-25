@@ -46,15 +46,15 @@ export async function createEvent(formData: any) {
 }
 
 // Редактирование события
-export async function editEvent(formData: any) {
+export async function editEvent(id: number, formData: any) {
   const headers = new Headers();
   headers.append("Authorization", `Bearer ${localStorage.getItem('access_token')}`);
-  const response = await fetch(`${API_BASE_URL}/api/events/`, {
+  const response = await fetch(`${API_BASE_URL}/api/events/${id}/`, {
     method: 'PATCH',
     headers,
     body: formData,
   })
-  const json = await response.json();
+  const json = await response.json() as IEvent;
   return json;
 }
 
@@ -135,6 +135,7 @@ const eventsSlice = createSlice({
       // Получение слайдов к событию 
       .addCase(loadSlides.pending, (state) => {
         state.waiting = true;
+        state.slides = [];
       })
       .addCase(loadSlides.fulfilled, (state, action: PayloadAction<ISlide[]>) => {
         state.slides = action.payload;

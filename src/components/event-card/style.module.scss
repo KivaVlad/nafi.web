@@ -1,7 +1,6 @@
 .card {
   padding: 20px 11px 12px 17px;
   height: 140px;
-  max-width: 276px;
   border-radius: 12px;
   border: 1px solid var(--purple-main);
   background-color: var(--white);
@@ -29,6 +28,7 @@
   font-size: 14px;
   color: var(--purple-medium);
   margin-top: 20px;
+  max-width: 250px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;

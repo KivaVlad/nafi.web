@@ -4,7 +4,7 @@ import {useAppSelector} from "../../hooks/use-selector";
 import {useAppDispatch} from "../../hooks/use-dispatch";
 import {signOut, remind} from "../../store/reducers/session";
 import {loadDetails} from "../../store/reducers/details";
-import {loadSlides} from "../../store/reducers/events";
+import {loadSlides, setWaiting, editEvent, onSuccessCreate, onError} from "../../store/reducers/events";
 import Loader from "../../components/loader";
 import Header from "../../components/header";
 import SmallLayout from "../../components/small-layout";
@@ -32,6 +32,21 @@ const Editor: React.FC = () => {
   const callbacks = {
     onLogout: useCallback(() => dispatch(signOut()), []),
     onNav: useCallback(() => navigate(-1), []),
+    onEdit: useCallback((pdf: File) => {
+      const formData = new FormData();
+      formData.append("pdf", pdf, pdf.name);
+      formData.append("title", result.title);
+      formData.append("start_date", result.start_date);
+      formData.append("current_slide", "1");
+      formData.append("user", String(result.user));
+      dispatch(setWaiting());
+      editEvent(result.id, formData)
+      .then((res) => {
+        dispatch(onSuccessCreate(res));
+        if (id) dispatch(loadSlides(id));
+      })
+      .catch(() => dispatch(onError()))
+    }, [result]),
   }
 
   return (
@@ -39,7 +54,7 @@ const Editor: React.FC = () => {
       <Header username={data.name}/>
       <SmallLayout
         navbar={<SmallNavbar onLogout={callbacks.onLogout}/>}
-        main={<SlidesEditor title={result.title} slides={slides} onNav={callbacks.onNav}/>}
+        main={<SlidesEditor title={result.title} slides={slides} onNav={callbacks.onNav} onEdit={callbacks.onEdit}/>}
       />
     </Loader>
   )

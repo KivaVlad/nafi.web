@@ -1,4 +1,4 @@
-import {memo, useState, useEffect} from "react";
+import {memo, useState, useEffect, useRef} from "react";
 import {arrowBackIcon} from "../../assets/icons";
 import {ISlide} from "../../types/i-slide";
 import {uploadIcom, copySuccessIcon, timerIcon, notificationIcon, linksIcon, translateIcon, chartIcon, messagesIcon} from "../../assets/icons";
@@ -8,16 +8,25 @@ interface IProps {
   title: string;
   slides: ISlide[];
   onNav: () => void;
+  onEdit: (pdf: File) => void;
 }
 
-const SlidesEditor: React.FC<IProps> = ({title, slides, onNav}) => {
+const SlidesEditor: React.FC<IProps> = ({title, slides, onNav, onEdit}) => {
   const [currentImg, setCurrentImg] = useState<string>('');
+  const [pdf, setPdf] = useState<File | undefined>();
+  const fileRef = useRef<HTMLInputElement | any>();
 
   useEffect(() => {
     if (slides?.length) {
       setCurrentImg(slides[0]?.jpeg);
     }
   }, [])
+
+  useEffect(() => {
+    if (pdf) {
+      onEdit(pdf);
+    }
+  }, [pdf])
 
   return (
     <div className={styles.wrapper}>
@@ -50,9 +59,11 @@ const SlidesEditor: React.FC<IProps> = ({title, slides, onNav}) => {
         </div>
 
         <div className={styles.working_zone}>
-          <div className={styles.big_image}>
-            <img src={currentImg} alt=""/>
-          </div>
+          {currentImg && 
+            <div className={styles.big_image}>
+              <img src={currentImg} alt=""/>
+            </div>
+          }
         </div>
 
         <div className={styles.options}>
@@ -61,10 +72,17 @@ const SlidesEditor: React.FC<IProps> = ({title, slides, onNav}) => {
             <p>Подключите нужные функции</p>
 
             <div className={styles.option_buttons}>
-              <button>
+              <button onClick={() => fileRef.current?.click()}>
                 <img src={uploadIcom} alt=""/>
                 Загрузить PDF
               </button>
+              <input 
+                ref={fileRef}
+                type='file'
+                className={styles.hidden}
+                accept=".pdf"
+                onChange={(e) => setPdf(e.target.files?.[0])}
+              />
               <button>
                 <img src={copySuccessIcon} alt=""/>
                 Дублировать

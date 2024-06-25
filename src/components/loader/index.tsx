@@ -10,7 +10,9 @@ const Loader: React.FC<IProps> = ({active, children}) => {
   if (active) {
     return (
       <div className={styles.loader}>
-        <div className={styles.spinner}></div>
+        <div className={styles.wrapper}>
+          <div className={styles.spinner}></div>
+        </div>
         {children}
       </div>
     )
