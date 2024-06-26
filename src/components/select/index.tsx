@@ -1,4 +1,4 @@
-import {memo, useState} from "react";
+import {memo, useState, useRef, useEffect} from "react";
 import {arrowDownIcon} from "../../assets/icons";
 import styles from "./style.module.scss";
 import type {ISelect} from "../../types/i-select";
@@ -15,17 +15,31 @@ interface IProps {
 const Select: React.FC<IProps> = (props) => {
   const {label, error, value, setValue, options, placeholder} = props;
   let [active, setActive] = useState<boolean>(false);
+  const selectRef = useRef<any>();
 
   function handleClick(param: string) {
     setValue(param);
     setActive(false);
   }
 
+  function handleClickOutside(e: MouseEvent) {
+    if (selectRef.current && !selectRef.current.contains(e.target)) {
+      setActive(false);
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    }
+  }, [])
+
   return (
     <div className={styles.wrapper}>
       {label && <label>{label}</label>}
 
-      <div className={styles.select_wrapper}>
+      <div ref={selectRef} className={styles.select_wrapper}>
         
         <div className={!error ? styles.select : styles.error_select} onClick={() => setActive(active = !active )}>
           <span>{value ? value : placeholder}</span>
