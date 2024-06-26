@@ -139,7 +139,7 @@
   }
 }
 
-.btn, .file_btn, .error_file_btn {
+.btn, .file_btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -164,18 +164,9 @@
   }
 }
 
-.btn svg, .file_btn svg, .error_file_btn svg{
+.btn svg, .file_btn svg{
   width: 15px;
   height: 15px;
-}
-
-.error_file_btn {
-  border: 1px solid var(--red);
-  color: var(--red);
-}
-
-.error_file_btn svg path{
- stroke: var(--red);
 }
 
 .hidden {
