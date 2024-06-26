@@ -36,8 +36,6 @@ const CreateEventForm: React.FC = () => {
   const [errorEventType, setErrorEventType] = useState<string>('');
   const [errorEventDate, setErrorEventDate] = useState<string>('');
   const [errorParticipants, setErrorParticipants] = useState<string>('');
-  const [errorPdf, setErrorPdf] = useState<string>('');
-  const [errorTag, setErrorTag] = useState<string>('');
 
   // Отправка данных формы
   function handleSubmit(e: React.ChangeEvent<HTMLFormElement>) {
@@ -69,24 +67,22 @@ const CreateEventForm: React.FC = () => {
   function onNavigate() {
     validate();
     if (validate()) {
-      if (pdf) {
-        // Добавляем все необходимые данные в FormData
-        const formData = new FormData();
-        formData.append("pdf", pdf, pdf.name);
-        formData.append("title", eventName);
-        formData.append("start_date", eventDate);
-        formData.append("current_slide", "1");
-        formData.append("user", userId);
-        // Устанавливаем режим ожидания
-        dispatch(setWaiting());
-        // Создание нового события
-        createEvent(formData)
-        .then((res) => {
-          dispatch(onSuccessCreate(res));
-          navigate(`/events/editor/${res.id}`);
-        })
-        .catch(() => dispatch(onError()))
-      }
+      // Добавляем все необходимые данные в FormData
+      const formData = new FormData();
+      pdf && formData.append("pdf", pdf, pdf.name);
+      formData.append("title", eventName);
+      formData.append("start_date", eventDate);
+      formData.append("current_slide", "1");
+      formData.append("user", userId);
+      // Устанавливаем режим ожидания
+      dispatch(setWaiting());
+      // Создание нового события
+      createEvent(formData)
+      .then((res) => {
+        dispatch(onSuccessCreate(res));
+        navigate(`/events/editor/${res.id}`);
+      })
+      .catch(() => dispatch(onError()))
     }
   }
 
@@ -96,9 +92,7 @@ const CreateEventForm: React.FC = () => {
     let isValidEventName = false;
     let isValidEventType = false;
     let isValidEventDate = false;
-    let isValidPdf = false;
     let isValidParticipants = false;
-    let isValidTag = false;
 
     if (!eventName.trim()) {
       setErrorEventName('Обязательное поле');
@@ -124,14 +118,6 @@ const CreateEventForm: React.FC = () => {
       isValidEventDate = true;
     }
 
-    if (!pdf) {
-      setErrorPdf('Добавьте pdf файл');
-      isValidPdf = false;
-    } else {
-      setErrorPdf('');
-      isValidPdf = true;
-    }
-
     if (!participants.length) {
       setErrorParticipants('Обязательное поле');
       isValidParticipants = false;
@@ -140,15 +126,7 @@ const CreateEventForm: React.FC = () => {
       isValidParticipants = true;
     }
 
-    if (!tag.trim()) {
-      setErrorTag('Обязательное поле');
-      isValidTag = false;
-    } else {
-      setErrorTag('');
-      isValidTag = true;
-    }
-
-    if (isValidEventDate && isValidEventName && isValidEventType && isValidParticipants && isValidTag && isValidPdf) {
+    if (isValidEventDate && isValidEventName && isValidEventType && isValidParticipants) {
       isValid = true;
     }
     return isValid;
@@ -159,9 +137,7 @@ const CreateEventForm: React.FC = () => {
     if (eventType.trim()) setErrorEventType('');
     if (eventDate.length) setErrorEventDate('');
     if (participants.trim()) setErrorParticipants('');
-    if (pdf) setErrorPdf('');
-    if (tag.trim()) setErrorTag('');
-  }, [eventName, eventType, eventDate, participants, pdf, tag])
+  }, [eventName, eventType, eventDate, participants])
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
@@ -209,7 +185,7 @@ const CreateEventForm: React.FC = () => {
         <div className={styles.select_container}>
           <label>Придумайте тег для события*</label>
           <p>Этот тег необходимо будет показать участникам, чтобы они могли присоедениться к событию</p>
-          <Input placeholder="#тэг" type="text" error={errorTag} value={tag} onChange={setTag}/>
+          <Input placeholder="#тэг" type="text" value={tag} onChange={setTag}/>
           <div className={styles.tag_params}>
             <img src={checkIcon} alt=""/>
             <p>Тег свободен</p>
@@ -245,7 +221,7 @@ const CreateEventForm: React.FC = () => {
             <button 
               type='button' 
               onClick={() => fileRef.current?.click()}
-              className={!errorPdf ? styles.file_btn : styles.error_file_btn}
+              className={styles.file_btn}
             >
               <DownloadIcon/> Загрузить PDF
             </button>
