@@ -17,8 +17,7 @@ export const eventsTypeOptions: ISelect[] = [
   {id: '1', title: 'Мастер-класс', value: 'Мастер-класс'},
   {id: '2', title: 'Тренинг', value: 'Тренинг'},
   {id: '3', title: 'Семинар', value: 'Семинар'},
-  {id: '4', title: 'Мастер-класс', value: 'Мастер-класс'},
-  {id: '5', title: 'HR', value: 'HR'},
+  {id: '4', title: 'HR', value: 'HR'},
 ]
 
 export const numberParticipants: ISelect[] = [
